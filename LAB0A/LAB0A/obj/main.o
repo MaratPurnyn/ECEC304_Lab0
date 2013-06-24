@@ -1,0 +1,29 @@
+XH
+H 1 areas 1 global symbols
+M main.asm
+A text size 12 flags 0
+dbfile ./main.asm
+dbfunc 0 ? 0 I
+dbline F 0
+dbline 10 2
+dbline 11 4
+dbline 12 6
+dbline 13 9
+dbline 14 B
+dbline 15 E
+dbline 18 10
+dbfile ./lib/PSoCAPI.inc
+dbfunc 0 ? 0 I
+dbfile ./main.asm
+dbfunc 0 ? 0 I
+dbfile memory.inc
+dbfunc 0 ? 0 I
+dbfile ./main.asm
+dbfunc 0 ? 0 I
+dbfile C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc
+dbfunc 0 ? 0 I
+S _main Def0000
+T 00 00 5D 00 21 01 A0 06 43 04 01 8F F6 41 04 FE
+R 00 00 00 00
+T 00 0E 8F F1 8F FF
+R 00 00 00 00
