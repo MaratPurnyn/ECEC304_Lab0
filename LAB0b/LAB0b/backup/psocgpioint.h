@@ -56,3 +56,39 @@ BYTE			LED2_IntCtrl_1_ADDR;
 #pragma	ioport	LED2_IntEn_ADDR:	0x1
 BYTE			LED2_IntEn_ADDR;
 #define LED2_MASK 0x4
+// LED3 address and mask defines
+#pragma	ioport	LED3_Data_ADDR:	0x0
+BYTE			LED3_Data_ADDR;
+#pragma	ioport	LED3_DriveMode_0_ADDR:	0x100
+BYTE			LED3_DriveMode_0_ADDR;
+#pragma	ioport	LED3_DriveMode_1_ADDR:	0x101
+BYTE			LED3_DriveMode_1_ADDR;
+#pragma	ioport	LED3_DriveMode_2_ADDR:	0x3
+BYTE			LED3_DriveMode_2_ADDR;
+#pragma	ioport	LED3_GlobalSelect_ADDR:	0x2
+BYTE			LED3_GlobalSelect_ADDR;
+#pragma	ioport	LED3_IntCtrl_0_ADDR:	0x102
+BYTE			LED3_IntCtrl_0_ADDR;
+#pragma	ioport	LED3_IntCtrl_1_ADDR:	0x103
+BYTE			LED3_IntCtrl_1_ADDR;
+#pragma	ioport	LED3_IntEn_ADDR:	0x1
+BYTE			LED3_IntEn_ADDR;
+#define LED3_MASK 0x8
+// LED4 address and mask defines
+#pragma	ioport	LED4_Data_ADDR:	0x0
+BYTE			LED4_Data_ADDR;
+#pragma	ioport	LED4_DriveMode_0_ADDR:	0x100
+BYTE			LED4_DriveMode_0_ADDR;
+#pragma	ioport	LED4_DriveMode_1_ADDR:	0x101
+BYTE			LED4_DriveMode_1_ADDR;
+#pragma	ioport	LED4_DriveMode_2_ADDR:	0x3
+BYTE			LED4_DriveMode_2_ADDR;
+#pragma	ioport	LED4_GlobalSelect_ADDR:	0x2
+BYTE			LED4_GlobalSelect_ADDR;
+#pragma	ioport	LED4_IntCtrl_0_ADDR:	0x102
+BYTE			LED4_IntCtrl_0_ADDR;
+#pragma	ioport	LED4_IntCtrl_1_ADDR:	0x103
+BYTE			LED4_IntCtrl_1_ADDR;
+#pragma	ioport	LED4_IntEn_ADDR:	0x1
+BYTE			LED4_IntEn_ADDR;
+#define LED4_MASK 0x10

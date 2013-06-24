@@ -1,75 +1,69 @@
 XH
-H 2 areas C global symbols
+H 2 areas 9 global symbols
 M main.c
 S __r0 Ref0000
-S _LEDFlashTimer_DisableInt Ref0000
 S _VR_ADC_GetSamples Ref0000
-S _LEDFlashTimer_Start Ref0000
 S _VR_ADC_Start Ref0000
 S _VR_ADC_fIsDataAvailable Ref0000
 S _VR_PGA_Start Ref0000
 S _VR_ADC_bClearFlagGetData Ref0000
-S _LEDFlashTimer_EnableInt Ref0000
-A text size 60 flags 0
+A text size 54 flags 0
 dbfile ./main.c
 dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB0b\LAB0b\main.c
 dbfunc e main 0 fV
 dbline FFFFFFFF 0
-dbline 18 0
-dbline 19 0
-dbline 1C 2
-dbline 1F 6
-dbline 23 B
-dbline 26 10
-dbline 2C 18
-dbline 2D 18
-dbline 31 24
-dbline 31 24
-dbline 37 2E
-dbline 3A 34
-dbline 3A 34
-dbline 3C 39
-dbline 3E 3C
-dbline 40 3E
-dbline 43 47
-dbline 43 47
-dbline 45 4C
-dbline 48 4E
-dbline 49 4E
-dbline 4B 53
-dbline 4D 56
-dbline 4E 56
-dbline 4F 56
-dbline 2A 56
-dbline FFFFFFFE 58
-dbline 0 58
-dbfunc e LEDFlashTimer_ISR_C 5A fV
-dbline FFFFFFFF 5A
-dbline 53 5B
-dbline 55 5B
-dbline FFFFFFFE 5E
-dbline 0 5F
+dbline 1B 0
+dbline 1C 0
+dbline 22 2
+dbline 26 8
+dbline 29 D
+dbline 2F 15
+dbline 30 15
+dbline 34 21
+dbline 34 21
+dbline 39 2B
+dbline 3A 2E
+dbline 3B 33
+dbline 3B 33
+dbline 3C 36
+dbline 3D 38
+dbline 3F 40
+dbline 3F 40
+dbline 40 42
+dbline 42 4A
+dbline 42 4A
+dbline 43 4A
+dbline 45 4A
+dbline 46 4A
+dbline 47 4A
+dbline 2D 4A
+dbline FFFFFFFE 4C
+dbline 0 4C
+dbfunc e LEDFlashTimer_ISR_C 4E fV
+dbline FFFFFFFF 4E
+dbline 4B 4F
+dbline 4D 4F
+dbline FFFFFFFE 52
+dbline 0 53
 S _main Def0000
-S _LEDFlashTimer_ISR_C Def005A
+S _LEDFlashTimer_ISR_C Def004E
 A data size 1 flags 20
 dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB0b\LAB0b\main.c
 dbsym e ucVR_ADCResult 0 c
 S _ucVR_ADCResult Def0000
-T 00 00 71 01 10 7C 00 00 50 03 7C 00 00 50 03 7C
-R 00 00 00 00 02 06 00 03 02 0B 00 06
-T 00 0E 00 00 50 00 7C 00 00 20 80 3F 10 7C 00 00
-R 00 00 00 00 02 02 00 04 02 07 00 02 02 0E 00 05
-T 00 1C 20 62 D0 00 00 39 00 A0 33 10 7C 00 00 20
-R 00 00 00 00 43 05 00 00 02 0D 00 07
-T 00 29 62 D0 00 00 53 00 00 50 55 3A 00 00 C0 0B
-R 00 00 00 00 41 04 00 01 01 07 00 01 01 0C 00 01
-T 00 34 10 7C 00 00 20 41 00 FE 80 19 62 D0 00 00
-R 00 00 00 00 02 04 00 01 41 0E 00 01
-T 00 41 50 AA 3A 00 00 C0 08 10 7C 00 00 20 80 09
-R 00 00 00 00 01 05 00 01 02 0B 00 08
-T 00 4E 10 7C 00 00 20 43 00 01 8F C1 8F FF 08 45
-R 00 00 00 00 02 04 00 01
-T 00 5C 00 01 18 7E
+T 00 00 71 01 10 50 03 7C 00 00 50 03 7C 00 00 50
+R 00 00 00 00 02 08 00 04 02 0D 00 02
+T 00 0E 00 7C 00 00 20 80 36 10 7C 00 00 20 62 D0
+R 00 00 00 00 02 04 00 01 02 0B 00 03
+T 00 1C 00 00 39 00 A0 2A 10 7C 00 00 20 62 D0
+R 00 00 00 00 43 02 00 00 02 0A 00 05
+T 00 28 00 00 53 00 00 62 00 FE 3C 00 00 40 D0 06
+R 00 00 00 00 41 02 00 01 01 05 00 01 01 0B 00 01
+T 00 33 62 00 01 80 13 62 D0 00 00 3C 00 00 80 D0
+R 00 00 00 00 41 09 00 01 01 0C 00 01
+T 00 3F 03 80 09 62 D0 00 00 3C 00 00 C0 D0 01 8F
+R 00 00 00 00 41 07 00 01 01 0A 00 01
+T 00 4B CA 8F FF 08 45 00 01 18 7E
 R 00 00 00 00
 T 00 00 00
 R 00 00 00 01

@@ -1,6 +1,6 @@
 Project:      output/LAB0b
 Build Number: 0
-Date:         Mon Jun 24 16:27:33 2013
+Date:         Mon Jun 24 17:27:49 2013
 Compiler:     ICCM8C
 Version:      7.05.00
 
@@ -39,23 +39,23 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                     UserModules   03A5   019C =    412. bytes (rel,con,rom,code)
+                     UserModules   03A5   0153 =    339. bytes (rel,con,rom,code)
 
        Addr  Global Symbol
       -----  --------------------------------
+       03A5  _VR_PGA_SetPower
        03A5  VR_PGA_Start
        03A5  VR_PGA_SetPower
-       03A5  _VR_PGA_SetPower
        03A5  _VR_PGA_Start
        03B7  VR_PGA_SetGain
        03B7  _VR_PGA_SetGain
-       03E1  _VR_PGA_Stop
        03E1  VR_PGA_Stop
+       03E1  _VR_PGA_Stop
        03E5  _VR_ADC_ADConversion_ISR
        0453  VR_ADC_Start
        0453  _VR_ADC_Start
-       0462  VR_ADC_SetPower
        0462  _VR_ADC_SetPower
+       0462  VR_ADC_SetPower
        0474  VR_ADC_Stop
        0474  _VR_ADC_Stop
        047E  _VR_ADC_GetSamples
@@ -64,69 +64,41 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
        04A7  VR_ADC_StopADC
        04BB  _VR_ADC_fIsDataAvailable
        04BB  VR_ADC_fIsDataAvailable
-       04C1  _VR_ADC_wClearFlagGetData
        04C1  VR_ADC_iClearFlagGetData
        04C1  VR_ADC_wClearFlagGetData
+       04C1  _VR_ADC_wClearFlagGetData
        04C1  _VR_ADC_iClearFlagGetData
-       04D1  VR_ADC_bClearFlagGetData
        04D1  _VR_ADC_bClearFlagGetData
-       04D1  _VR_ADC_cClearFlagGetData
+       04D1  VR_ADC_bClearFlagGetData
        04D1  VR_ADC_cClearFlagGetData
+       04D1  _VR_ADC_cClearFlagGetData
        04DA  VR_ADC_iGetData
        04DA  _VR_ADC_iGetData
-       04DA  _VR_ADC_wGetData
        04DA  VR_ADC_wGetData
-       04E2  VR_ADC_cGetData
+       04DA  _VR_ADC_wGetData
+       04E2  VR_ADC_bGetData
        04E2  _VR_ADC_bGetData
        04E2  _VR_ADC_cGetData
-       04E2  VR_ADC_bGetData
+       04E2  VR_ADC_cGetData
        04E8  _VR_ADC_fClearFlag
        04E8  VR_ADC_fClearFlag
-       04F1  _VR_ADC_WritePulseWidth
        04F1  VR_ADC_WritePulseWidth
+       04F1  _VR_ADC_WritePulseWidth
        04F4  _LEDFlashTimer_ISR
-       04F8  _LEDFlashTimer_EnableInt
-       04F8  LEDFlashTimer_EnableInt
-       04FC  _LEDFlashTimer_DisableInt
-       04FC  LEDFlashTimer_DisableInt
-       0500  LEDFlashTimer_Start
-       0500  _LEDFlashTimer_Start
-       0504  LEDFlashTimer_Stop
-       0504  _LEDFlashTimer_Stop
-       0508  _LEDFlashTimer_WritePeriod
-       0508  LEDFlashTimer_WritePeriod
-       050B  LEDFlashTimer_WriteCompareValue
-       050B  _LEDFlashTimer_WriteCompareValue
-       050E  _bLEDFlashTimer_ReadCompareValue
-       050E  _LEDFlashTimer_bReadCompareValue
-       050E  bLEDFlashTimer_ReadCompareValue
-       050E  LEDFlashTimer_bReadCompareValue
-       0511  bLEDFlashTimer_ReadCounter
-       0511  _bLEDFlashTimer_ReadCounter
-       0511  bLEDFlashTimer_ReadTimerSaveCV
-       0511  _LEDFlashTimer_bReadTimerSaveCV
-       0511  LEDFlashTimer_bReadTimerSaveCV
-       0511  _bLEDFlashTimer_ReadTimerSaveCV
-       053C  _bLEDFlashTimer_ReadTimer
-       053C  _bLEDFlashTimer_CaptureCounter
-       053C  bLEDFlashTimer_CaptureCounter
-       053C  bLEDFlashTimer_ReadTimer
-       053C  _LEDFlashTimer_bReadTimer
-       053C  LEDFlashTimer_bReadTimer
-       0541  __UserModules_end
+       04F8  __UserModules_end
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                            text   0541   0060 =     96. bytes (rel,con,rom,code)
+                            text   04F8   0054 =     84. bytes (rel,con,rom,code)
 
        Addr  Global Symbol
       -----  --------------------------------
-       0541  __text_start
-       0541  _main
-       059B  _LEDFlashTimer_ISR_C
-       05A1  __xidata_start
-       05A1  __text_end
-       05A7  __xidata_end
+       04F8  __text_start
+       04F8  _main
+       0546  _LEDFlashTimer_ISR_C
+       054C  __xidata_start
+       054C  __text_end
+       0552  __xidata_end
 
 Area                               Start  End    Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
@@ -180,7 +152,7 @@ Files Linked      [ module(s) ]
 ./obj/boot.o	[ boot.asm ]
 obj/main.o	[ main.c ]
 <library>	[ vr_pga.asm, vr_adcint.asm, vr_adc.asm, psocconfigtbl.asm, psocconfig.asm, ledflashtimerint.asm ]
-[ ledflashtimer.asm, r1.asm, r0.asm ]
+[ r1.asm, r0.asm ]
 
 Area Definitions
 
@@ -188,6 +160,6 @@ Area Definitions
 -bdata:0.0x6ff
 -BInterruptRAM:0	allocated at: 0
 -Bvirtual_registers	allocated at: 0x8
--Blab0b_RAM	allocated at: 0
+-Blab0b_RAM
 -rwh:SSCParmBlk:0xf7.0xff
 

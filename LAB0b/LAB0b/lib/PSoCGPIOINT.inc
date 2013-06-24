@@ -30,3 +30,23 @@ LED2_IntCtrl_0_ADDR:	equ	102h
 LED2_IntCtrl_1_ADDR:	equ	103h
 LED2_IntEn_ADDR:	equ	1h
 LED2_MASK:	equ	4h
+; LED3 address and mask equates
+LED3_Data_ADDR:	equ	0h
+LED3_DriveMode_0_ADDR:	equ	100h
+LED3_DriveMode_1_ADDR:	equ	101h
+LED3_DriveMode_2_ADDR:	equ	3h
+LED3_GlobalSelect_ADDR:	equ	2h
+LED3_IntCtrl_0_ADDR:	equ	102h
+LED3_IntCtrl_1_ADDR:	equ	103h
+LED3_IntEn_ADDR:	equ	1h
+LED3_MASK:	equ	8h
+; LED4 address and mask equates
+LED4_Data_ADDR:	equ	0h
+LED4_DriveMode_0_ADDR:	equ	100h
+LED4_DriveMode_1_ADDR:	equ	101h
+LED4_DriveMode_2_ADDR:	equ	3h
+LED4_GlobalSelect_ADDR:	equ	2h
+LED4_IntCtrl_0_ADDR:	equ	102h
+LED4_IntCtrl_1_ADDR:	equ	103h
+LED4_IntEn_ADDR:	equ	1h
+LED4_MASK:	equ	10h
