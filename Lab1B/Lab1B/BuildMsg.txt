@@ -1,0 +1,12 @@
+Starting MAKE...
+creating project.mk 
+lib/psocconfig.asm
+lib/psocconfigtbl.asm
+./boot.asm
+Linking..
+!E obj/main2.o(27): {linker} multiple define: '_main'
+LMM info: area 'virtual_registers' uses 2 bytes in SRAM page 0
+make: *** [output/Lab1B.rom] Error -1
+ 
+Lab1B - 2 error(s) 0 warning(s) 16:46:53
+

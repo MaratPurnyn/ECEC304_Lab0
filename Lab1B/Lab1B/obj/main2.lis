@@ -1,0 +1,352 @@
+ 0000           ;-----------------------------------------------------------------------------
+ 0000           ; Assembly main line
+ 0000           ;-----------------------------------------------------------------------------
+ 0000           
+ 0000           //include "m8c.inc"       ; part specific constants and macros
+ 0007           SYSTEM_STACK_PAGE: equ 7   
+ 0000           SYSTEM_STACK_BASE_ADDR: equ 0h   
+ 0001           SYSTEM_LARGE_MEMORY_MODEL: equ 1   
+ 0000           SYSTEM_SMALL_MEMORY_MODEL: equ 0   
+ 0001           IMAGECRAFT: equ 1   
+ 0002           HITECH: equ 2   
+ 0001           TOOLCHAIN: equ IMAGECRAFT   
+ 0001           SYSTEM_TOOLS: equ 1   
+ 0001           SYSTEM_IDXPG_TRACKS_STK_PP: equ 1   
+ 0000           SYSTEM_IDXPG_TRACKS_IDX_PP: equ 0   
+ 0000           SYSTEM_MULTIPAGE_STACK: equ 0 
+ 0000           
+ 0000           
+ 0000           ;  ******* Function Class Definitions *******
+ 0000           ;
+ 0000           ;  These definitions are used to describe RAM access patterns. They provide
+ 0000           ;  documentation and they control prologue and epilogue macros that perform
+ 0000           ;  the necessary housekeeping functions for large memory model devices like
+ 0000           ;  the CY8C29000.
+ 0000           
+ 0001           RAM_USE_CLASS_1:               equ 1   ; PUSH, POP & I/O access
+ 0002           RAM_USE_CLASS_2:               equ 2   ; Indexed address mode on stack page
+ 0004           RAM_USE_CLASS_3:               equ 4   ; Indexed address mode to any page
+ 0008           RAM_USE_CLASS_4:               equ 8   ; Direct/Indirect address mode access
+ 0000           
+ 0000           ; ******* Hi Tech Specific *******
+ 0000           ; Turn on the expansion of all macros by default
+                IF (TOOLCHAIN & HITECH)
+                OPT EXPAND
+                ENDIF
+                ;  ******* Page Pointer Manipulation Macros *******
+                ;
+                ;  Most of the following macros are conditionally compiled so they only
+                ;  produce code if the large memory model is selected.
+                
+                   ;-----------------------------------------------
+                   ;  Set Stack Page Macro
+                   ;-----------------------------------------------
+                   ;
+                   ;  DESC: Modify STK_PP in the large or small memory Models.
+                   ;
+                   ; INPUT: Constant (e.g., SYSTEM_STACK_PAGE) that specifies the RAM page on
+                   ;        which stack operations like PUSH and POP store and retrieve their
+                   ;        data
+                   ;
+                   ;  COST: 8 instruction cycles (in LMM only)
+                
+ 0000              macro RAM_SETPAGE_STK( PG_NUMBER )
+ 0000              IF ( SYSTEM_LARGE_MEMORY_MODEL )
+ 0000                 mov reg[STK_PP], @PG_NUMBER
+ 0000              ENDIF
+ 0000              macro RAM_SETPAGE_CUR( PG_NUMBER )
+ 0000              IF ( SYSTEM_LARGE_MEMORY_MODEL )
+ 0000                 mov reg[CUR_PP], @PG_NUMBER
+ 0000              ENDIF
+ 0000              macro RAM_SETPAGE_IDX( PG_NUMBER )
+ 0000              IF ( SYSTEM_LARGE_MEMORY_MODEL )
+ 0000                 mov reg[IDX_PP], @PG_NUMBER
+ 0000              ENDIF
+ 0000              macro RAM_SETPAGE_MVR( PG_NUMBER )
+ 0000              IF ( SYSTEM_LARGE_MEMORY_MODEL )
+ 0000                 mov reg[MVR_PP], @PG_NUMBER
+ 0000              ENDIF
+ 0000              macro RAM_SETPAGE_MVW( PG_NUMBER )
+ 0000              IF ( SYSTEM_LARGE_MEMORY_MODEL )
+ 0000                 mov reg[MVW_PP], @PG_NUMBER
+ 0000              ENDIF
+ 0000              macro RAM_SETPAGE_IDX2STK
+ 0000              IF ( SYSTEM_LARGE_MEMORY_MODEL )
+ 0000                 IF ( SYSTEM_MULTIPAGE_STACK )
+ 0000                    mov   A, reg[STK_PP]
+ 0000                    mov   reg[IDX_PP], A
+ 0000                 ELSE
+ 0000                    RAM_SETPAGE_IDX SYSTEM_STACK_PAGE
+ 0000                 ENDIF
+ 0000              ENDIF
+ 0000              macro RAM_CHANGE_PAGE_MODE( MODE )
+ 0000              IF ( SYSTEM_LARGE_MEMORY_MODEL )
+ 0000                 and   F, ~FLAG_PGMODE_MASK        ; NOTE: transition thru 00b state
+ 0000                 or    F,  FLAG_PGMODE_MASK & @MODE
+ 0000              ENDIF
+ 0000              macro RAM_SET_NATIVE_PAGING
+ 0000              IF ( SYSTEM_LARGE_MEMORY_MODEL )
+ 0000              IF ( SYSTEM_IDXPG_TRACKS_STK_PP )
+ 0000                 or    F,  FLAG_PGMODE_11b            ; LMM w/ IndexPage<==>StackPage
+ 0000              ENDIF ;  PGMODE LOCKED
+ 0000              IF ( SYSTEM_IDXPG_TRACKS_IDX_PP )
+ 0000                 or    F,  FLAG_PGMODE_10b            ; LMM with independent IndexPage
+ 0000              ENDIF ; PGMODE FREE
+ 0000              ENDIF ; SYSTEM_LARGE_MEMORY_MODEL
+ 0000              macro RAM_RESTORE_NATIVE_PAGING
+ 0000              IF ( SYSTEM_LARGE_MEMORY_MODEL )
+ 0000              IF ( SYSTEM_IDXPG_TRACKS_STK_PP )
+ 0000                 RAM_CHANGE_PAGE_MODE FLAG_PGMODE_11b ; LMM w/ IndexPage<==>StackPage
+ 0000              ENDIF ;  PGMODE LOCKED
+ 0000              IF ( SYSTEM_IDXPG_TRACKS_IDX_PP )
+ 0000                 RAM_CHANGE_PAGE_MODE FLAG_PGMODE_10b ; LMM with independent IndexPage
+ 0000              ENDIF ; PGMODE FREE
+ 0000              ENDIF ; SYSTEM_LARGE_MEMORY_MODEL
+ 0000              macro RAM_X_POINTS_TO_STACKPAGE
+ 0000              IF ( SYSTEM_LARGE_MEMORY_MODEL )
+ 0000                 or   F, FLAG_PGMODE_01b
+ 0000              ENDIF ;  SYSTEM_LARGE_MEMORY_MODEL
+ 0000              macro RAM_X_POINTS_TO_INDEXPAGE
+ 0000              IF ( SYSTEM_LARGE_MEMORY_MODEL )
+ 0000                 and  F, ~FLAG_PGMODE_01b
+ 0000              ENDIF ;  SYSTEM_LARGE_MEMORY_MODEL
+ 0000              macro RAM_PROLOGUE( ACTUAL_CLASS )
+ 0000           
+ 0000              IF ( @ACTUAL_CLASS & RAM_USE_CLASS_1 )
+ 0000              ; Nothing to do
+ 0000              ENDIF ; RAM_USE_CLASS_1
+ 0000           
+ 0000              IF ( @ACTUAL_CLASS & RAM_USE_CLASS_2 )
+ 0000                 IF ( SYSTEM_IDXPG_TRACKS_IDX_PP )
+ 0000                    RAM_X_POINTS_TO_STACKPAGE         ; exit native paging mode!
+ 0000                 ENDIF
+ 0000              ENDIF ; RAM_USE_CLASS_2
+ 0000           
+ 0000              IF ( @ACTUAL_CLASS & RAM_USE_CLASS_3 )
+ 0000                 IF ( SYSTEM_IDXPG_TRACKS_STK_PP )
+ 0000                    RAM_X_POINTS_TO_INDEXPAGE         ; exit native paging mode!
+ 0000                 ENDIF
+ 0000              ENDIF ; RAM_USE_CLASS_3
+ 0000           
+ 0000              IF ( @ACTUAL_CLASS & RAM_USE_CLASS_4 )
+ 0000              ; Nothing to do
+ 0000              ENDIF ; RAM_USE_CLASS_4
+ 0000           
+ 0000              macro RAM_EPILOGUE( ACTUAL_CLASS )
+ 0000           
+ 0000              IF ( @ACTUAL_CLASS & RAM_USE_CLASS_1 )
+ 0000              ; Nothing to do
+ 0000              ENDIF ; RAM_USE_CLASS_1
+ 0000           
+ 0000              IF ( @ACTUAL_CLASS & RAM_USE_CLASS_2 )
+ 0000                 RAM_RESTORE_NATIVE_PAGING
+ 0000              ENDIF ; RAM_USE_CLASS_2
+ 0000           
+ 0000              IF ( @ACTUAL_CLASS & RAM_USE_CLASS_3 )
+ 0000                 RAM_RESTORE_NATIVE_PAGING
+ 0000              ENDIF ; RAM_USE_CLASS_3
+ 0000           
+ 0000              IF ( @ACTUAL_CLASS & RAM_USE_CLASS_4 )
+ 0000              ; Nothing to do
+ 0000              ENDIF ; RAM_USE_CLASS_4
+ 0000           
+ 0000              macro REG_PRESERVE( IOReg )
+ 0000              mov   A, reg[ @IOReg ]
+ 0000              push  A
+ 0000              macro REG_RESTORE( IOReg )
+ 0000              pop   A
+ 0000              mov   reg[ @IOReg ], A
+ 0000              macro ISR_PRESERVE_PAGE_POINTERS
+ 0000              IF ( SYSTEM_LARGE_MEMORY_MODEL )
+ 0000                 REG_PRESERVE CUR_PP
+ 0000                 REG_PRESERVE IDX_PP
+ 0000                 REG_PRESERVE MVR_PP
+ 0000                 REG_PRESERVE MVW_PP
+ 0000              ENDIF
+ 0000              macro ISR_RESTORE_PAGE_POINTERS
+ 0000              IF ( SYSTEM_LARGE_MEMORY_MODEL )
+ 0000                 REG_RESTORE MVW_PP
+ 0000                 REG_RESTORE MVR_PP
+ 0000                 REG_RESTORE IDX_PP
+ 0000                 REG_RESTORE CUR_PP
+ 0000              ENDIF
+ 0000           macro PRESERVE_CPU_CONTEXT
+ 0000           IF ( TOOLCHAIN & IMAGECRAFT )
+ 0000             PUSH A
+ 0000             IF ( SYSTEM_LARGE_MEMORY_MODEL )
+ 0000               ISR_PRESERVE_PAGE_POINTERS
+ 0000               RAM_RESTORE_NATIVE_PAGING
+ 0000               MOV reg[CUR_PP], >__r0 ;Set CUR_PP to same page as virtual registers
+ 0000             ENDIF
+ 0000             MOV A, [__r0]
+ 0000             PUSH A
+ 0000             MOV A, [__r1]
+ 0000             PUSH A
+ 0000             MOV A, [__r2]
+ 0000             PUSH A
+ 0000             MOV A, [__r3]
+ 0000             PUSH A
+ 0000             MOV A, [__r4]
+ 0000             PUSH A
+ 0000             MOV A, [__r5]
+ 0000             PUSH A
+ 0000             MOV A, [__r6]
+ 0000             PUSH A
+ 0000             MOV A, [__r7]
+ 0000             PUSH A
+ 0000             MOV A, [__r8]
+ 0000             PUSH A
+ 0000             MOV A, [__r9]
+ 0000             PUSH A
+ 0000             MOV A, [__r10]
+ 0000             PUSH A
+ 0000             MOV A, [__r11]
+ 0000             PUSH A
+ 0000             MOV A, [__rX]
+ 0000             PUSH A
+ 0000             MOV A, [__rY]
+ 0000             PUSH A
+ 0000             MOV A, [__rZ]
+ 0000             PUSH A
+ 0000             IF ( SYSTEM_LARGE_MEMORY_MODEL )
+ 0000               MOV REG[CUR_PP], 0
+ 0000             ENDIF
+ 0000           ENDIF
+ 0000           macro RESTORE_CPU_CONTEXT
+ 0000           IF ( TOOLCHAIN & IMAGECRAFT )
+ 0000             IF ( SYSTEM_LARGE_MEMORY_MODEL )
+ 0000               RAM_RESTORE_NATIVE_PAGING
+ 0000               MOV reg[CUR_PP], >__r0 ;Set CUR_PP to same page as virtual registers
+ 0000             ENDIF
+ 0000             POP A
+ 0000             MOV [__rZ], A
+ 0000             POP A
+ 0000             MOV [__rY], A
+ 0000             POP A
+ 0000             MOV [__rX], A
+ 0000             POP A
+ 0000             MOV [__r11], A
+ 0000             POP A
+ 0000             MOV [__r10], A
+ 0000             POP A
+ 0000             MOV [__r9], A
+ 0000             POP A
+ 0000             MOV [__r8], A
+ 0000             POP A
+ 0000             MOV [__r7], A
+ 0000             POP A
+ 0000             MOV [__r6], A
+ 0000             POP A
+ 0000             MOV [__r5], A
+ 0000             POP A
+ 0000             MOV [__r4], A
+ 0000             POP A
+ 0000             MOV [__r3], A
+ 0000             POP A
+ 0000             MOV [__r2], A
+ 0000             POP A
+ 0000             MOV [__r1], A
+ 0000             POP A
+ 0000             MOV [__r0], A
+ 0000             IF ( SYSTEM_LARGE_MEMORY_MODEL )
+ 0000               ISR_RESTORE_PAGE_POINTERS
+ 0000               AND F, FLAG_PGMODE_0
+ 0000             ENDIF
+ 0000             POP A
+ 0000           ENDIF
+ 0004           Bit0_Data_ADDR:	equ	4h
+ 0104           Bit0_DriveMode_0_ADDR:	equ	104h
+ 0105           Bit0_DriveMode_1_ADDR:	equ	105h
+ 0007           Bit0_DriveMode_2_ADDR:	equ	7h
+ 0006           Bit0_GlobalSelect_ADDR:	equ	6h
+ 0106           Bit0_IntCtrl_0_ADDR:	equ	106h
+ 0107           Bit0_IntCtrl_1_ADDR:	equ	107h
+ 0005           Bit0_IntEn_ADDR:	equ	5h
+ 0001           Bit0_MASK:	equ	1h
+ 0000           ; Bit1 address and mask equates
+ 0004           Bit1_Data_ADDR:	equ	4h
+ 0104           Bit1_DriveMode_0_ADDR:	equ	104h
+ 0105           Bit1_DriveMode_1_ADDR:	equ	105h
+ 0007           Bit1_DriveMode_2_ADDR:	equ	7h
+ 0006           Bit1_GlobalSelect_ADDR:	equ	6h
+ 0106           Bit1_IntCtrl_0_ADDR:	equ	106h
+ 0107           Bit1_IntCtrl_1_ADDR:	equ	107h
+ 0005           Bit1_IntEn_ADDR:	equ	5h
+ 0002           Bit1_MASK:	equ	2h
+ 0000           ; Bit2 address and mask equates
+ 0004           Bit2_Data_ADDR:	equ	4h
+ 0104           Bit2_DriveMode_0_ADDR:	equ	104h
+ 0105           Bit2_DriveMode_1_ADDR:	equ	105h
+ 0007           Bit2_DriveMode_2_ADDR:	equ	7h
+ 0006           Bit2_GlobalSelect_ADDR:	equ	6h
+ 0106           Bit2_IntCtrl_0_ADDR:	equ	106h
+ 0107           Bit2_IntCtrl_1_ADDR:	equ	107h
+ 0005           Bit2_IntEn_ADDR:	equ	5h
+ 0004           Bit2_MASK:	equ	4h
+ 0000           ; Bit3 address and mask equates
+ 0004           Bit3_Data_ADDR:	equ	4h
+ 0104           Bit3_DriveMode_0_ADDR:	equ	104h
+ 0105           Bit3_DriveMode_1_ADDR:	equ	105h
+ 0007           Bit3_DriveMode_2_ADDR:	equ	7h
+ 0006           Bit3_GlobalSelect_ADDR:	equ	6h
+ 0106           Bit3_IntCtrl_0_ADDR:	equ	106h
+ 0107           Bit3_IntCtrl_1_ADDR:	equ	107h
+ 0005           Bit3_IntEn_ADDR:	equ	5h
+ 0008           Bit3_MASK:	equ	8h
+ 0000           ; Bit4 address and mask equates
+ 0004           Bit4_Data_ADDR:	equ	4h
+ 0104           Bit4_DriveMode_0_ADDR:	equ	104h
+ 0105           Bit4_DriveMode_1_ADDR:	equ	105h
+ 0007           Bit4_DriveMode_2_ADDR:	equ	7h
+ 0006           Bit4_GlobalSelect_ADDR:	equ	6h
+ 0106           Bit4_IntCtrl_0_ADDR:	equ	106h
+ 0107           Bit4_IntCtrl_1_ADDR:	equ	107h
+ 0005           Bit4_IntEn_ADDR:	equ	5h
+ 0010           Bit4_MASK:	equ	10h
+ 0000           ; Bit5 address and mask equates
+ 0004           Bit5_Data_ADDR:	equ	4h
+ 0104           Bit5_DriveMode_0_ADDR:	equ	104h
+ 0105           Bit5_DriveMode_1_ADDR:	equ	105h
+ 0007           Bit5_DriveMode_2_ADDR:	equ	7h
+ 0006           Bit5_GlobalSelect_ADDR:	equ	6h
+ 0106           Bit5_IntCtrl_0_ADDR:	equ	106h
+ 0107           Bit5_IntCtrl_1_ADDR:	equ	107h
+ 0005           Bit5_IntEn_ADDR:	equ	5h
+ 0020           Bit5_MASK:	equ	20h
+ 0000           ; Bit6 address and mask equates
+ 0004           Bit6_Data_ADDR:	equ	4h
+ 0104           Bit6_DriveMode_0_ADDR:	equ	104h
+ 0105           Bit6_DriveMode_1_ADDR:	equ	105h
+ 0007           Bit6_DriveMode_2_ADDR:	equ	7h
+ 0006           Bit6_GlobalSelect_ADDR:	equ	6h
+ 0106           Bit6_IntCtrl_0_ADDR:	equ	106h
+ 0107           Bit6_IntCtrl_1_ADDR:	equ	107h
+ 0005           Bit6_IntEn_ADDR:	equ	5h
+ 0040           Bit6_MASK:	equ	40h
+ 0000           ; Bit7 address and mask equates
+ 0004           Bit7_Data_ADDR:	equ	4h
+ 0104           Bit7_DriveMode_0_ADDR:	equ	104h
+ 0105           Bit7_DriveMode_1_ADDR:	equ	105h
+ 0007           Bit7_DriveMode_2_ADDR:	equ	7h
+ 0006           Bit7_GlobalSelect_ADDR:	equ	6h
+ 0106           Bit7_IntCtrl_0_ADDR:	equ	106h
+ 0107           Bit7_IntCtrl_1_ADDR:	equ	107h
+ 0005           Bit7_IntEn_ADDR:	equ	5h
+ 0080           Bit7_MASK:	equ	80h
+ 0000           
+                export _main
+                
+ 0000           _main:
+ 0000           loop:
+ 0000 5D04              mov     A,reg[04h]      ; 4 clk cycles
+ 0002 74                inc A                           ; 4
+ 0003 6004              mov reg[04h],A  ; 4
+ 0005 8FFA              jmp loop                        ; 5
+ 0007 40                nop                                     ; 4
+ 0008 40                nop
+ 0009 40                nop
+ 000A 40                nop
+ 000B 40                nop
+ 000C           
+ 000C           .terminate:
+ 000C 8FFF          jmp .terminate

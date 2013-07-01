@@ -1,0 +1,29 @@
+XH
+H 1 areas 1 global symbols
+M main.asm
+A text size E flags 0
+dbfile ./main.asm
+dbfunc 0 ? 0 I
+dbline D 0
+dbline E 2
+dbline F 3
+dbline 10 5
+dbline 11 7
+dbline 12 8
+dbline 13 9
+dbline 14 A
+dbline 15 B
+dbline 18 C
+dbfile PSoCAPI.inc
+dbfunc 0 ? 0 I
+dbfile ./lib/PSoCGPIOINT.inc
+dbfunc 0 ? 0 I
+dbfile ./lib/PSoCAPI.inc
+dbfunc 0 ? 0 I
+dbfile ./main.asm
+dbfunc 0 ? 0 I
+dbfile memory.inc
+dbfunc 0 ? 0 I
+S _main Def0000
+T 00 00 5D 04 74 60 04 8F FA 40 40 40 40 40 8F FF
+R 00 00 00 00
