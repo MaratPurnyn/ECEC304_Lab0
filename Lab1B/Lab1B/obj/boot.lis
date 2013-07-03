@@ -20,9 +20,9 @@
                 ;
                 ;=============================================================================
                 
- 0001           CPU_CLOCK:				equ	1h		;CPU clock value
+ 0002           CPU_CLOCK:				equ	2h		;CPU clock value
  0007           CPU_CLOCK_MASK:			equ	7h		;CPU clock mask
- 0001           CPU_CLOCK_JUST:			equ	1h		;CPU clock value justified
+ 0002           CPU_CLOCK_JUST:			equ	2h		;CPU clock value justified
  0000           SELECT_32K:				equ	0h		;32K select value
  0080           SELECT_32K_MASK:		equ	80h		;32K select mask
  0000           SELECT_32K_JUST:		equ	0h		;32K select value justified
@@ -2142,7 +2142,7 @@
  012E               ; And put decimator in full mode so it does not consume too much current.
  012E               ;
  012E 7110          or    F, FLAG_XIO_MASK
- 0130 62E001        mov  reg[OSC_CR0],(SELECT_32K_JUST | PLL_MODE_JUST | SLEEP_TIMER_JUST | CPU_CLOCK_JUST)
+ 0130 62E002        mov  reg[OSC_CR0],(SELECT_32K_JUST | PLL_MODE_JUST | SLEEP_TIMER_JUST | CPU_CLOCK_JUST)
  0133 43E780        or   reg[DEC_CR2],80h                    ; Put decimator in full mode
  0136 70EF          and   F, ~FLAG_XIO_MASK
  0138           

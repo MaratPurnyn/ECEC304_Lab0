@@ -6,9 +6,9 @@
 *		for CY8C29466
 ******************************************************************************/
 
-#define CPU_CLOCK              0x1     //CPU clock value
+#define CPU_CLOCK              0x2     //CPU clock value
 #define CPU_CLOCK_MASK         0x7     //CPU clock mask
-#define CPU_CLOCK_JUST         0x1     //CPU clock value justified
+#define CPU_CLOCK_JUST         0x2     //CPU clock value justified
 #define SELECT_32K             0x0     //32K select value
 #define SELECT_32K_MASK        0x80    //32K select mask
 #define SELECT_32K_JUST        0x0     //32K select value justified
@@ -73,7 +73,7 @@
 #define PORT_0_INTCTRL_1       0x0     //Port 0 interrupt control 1 register (PRT0IC1)
 #define PORT_1_GLOBAL_SELECT   0x0     //Port 1 global select register (PRT1GS)
 #define PORT_1_DRIVE_0         0xff    //Port 1 drive mode 0 register (PRT1DM0)
-#define PORT_1_DRIVE_1         0x0     //Port 1 drive mode 1 register (PRT1DM1)
+#define PORT_1_DRIVE_1         0xff    //Port 1 drive mode 1 register (PRT1DM1)
 #define PORT_1_DRIVE_2         0x0     //Port 1 drive mode 2 register (PRT1DM2)
 #define PORT_1_INTENABLE       0x0     //Port 1 interrupt enable register (PRT1IE)
 #define PORT_1_INTCTRL_0       0x0     //Port 1 interrupt control 0 register (PRT1IC0)

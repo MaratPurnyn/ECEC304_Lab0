@@ -4,9 +4,12 @@ lib/psocconfig.asm
 lib/psocconfigtbl.asm
 ./boot.asm
 Linking..
-!E obj/main2.o(27): {linker} multiple define: '_main'
 LMM info: area 'virtual_registers' uses 2 bytes in SRAM page 0
-make: *** [output/Lab1B.rom] Error -1
+LMM info: area 'bss' item of 1 bytes allocated in SRAM page 0
+idata dump at output/Lab1B.idata
+  ROM 2% full. 463 out of 32768 bytes used (does not include absolute areas).
+  RAM 1% full. 3 bytes used (does not include stack usage).
+Built with ICCM8C STD V7.05.00
  
-Lab1B - 2 error(s) 0 warning(s) 16:46:53
+Lab1B - 0 error(s) 0 warning(s) 14:24:17
 
