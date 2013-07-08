@@ -4,12 +4,12 @@ M main.asm
 A text size D flags 0
 dbfile ./main.asm
 dbfunc 0 ? 0 I
-dbline 10 0
-dbline 12 3
-dbline 13 5
-dbline 14 7
-dbline 15 9
-dbline 18 B
+dbline 13 0
+dbline 15 3
+dbline 16 5
+dbline 17 7
+dbline 18 9
+dbline 1B B
 dbfile PSoCAPI.inc
 dbfunc 0 ? 0 I
 dbfile ./lib/PSoCGPIOINT.inc
@@ -25,9 +25,9 @@ dbfunc 0 ? 0 I
 dbfile C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc
 dbfunc 0 ? 0 I
 S _main Def0000
-A bss size 1 flags 20
-S bShadow Def0000
-T 00 00 55 00 00 00 76 00 00 51 00 00 60 04 8F F9
+A myArea size 41 flags C
+S bShadow Def0040
+T 00 00 55 00 40 00 76 00 40 51 00 40 60 04 8F F9
 R 00 00 00 00 01 03 00 01 01 07 00 01 01 0A 00 01
 T 00 0B 8F FF
 R 00 00 00 00

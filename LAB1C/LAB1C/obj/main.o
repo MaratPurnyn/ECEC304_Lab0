@@ -1,0 +1,59 @@
+XH
+H 2 areas 2 global symbols
+M main.asm
+A text size 3E flags 0
+dbfile ./main.asm
+dbfunc 0 ? 0 I
+dbline 16 0
+dbline 17 3
+dbline 18 6
+dbline 19 9
+dbline 1A C
+dbline 1B F
+dbline 1F 12
+dbline 20 15
+dbline 24 17
+dbline 25 1A
+dbline 26 1D
+dbline 27 1F
+dbline 28 21
+dbline 2A 23
+dbline 2B 25
+dbline 2C 27
+dbline 2D 29
+dbline 2E 2B
+dbline 30 2D
+dbline 32 30
+dbline 33 32
+dbline 34 34
+dbline 35 36
+dbline 36 38
+dbline 37 3A
+dbline 3C 3C
+dbfile ./lib/PSoCAPI.inc
+dbfunc 0 ? 0 I
+dbfile ./main.asm
+dbfunc 0 ? 0 I
+dbfile memory.inc
+dbfunc 0 ? 0 I
+dbfile ./main.asm
+dbfunc 0 ? 0 I
+dbfile C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc
+dbfunc 0 ? 0 I
+S _main Def0000
+A MyArea size 5 flags 20
+S bShadow Def0000
+T 00 00 55 00 00 00 55 00 01 00 55 00 02 00 55
+R 00 00 00 00 01 03 00 01 01 07 00 01 01 0B 00 01
+T 00 0A 00 03 00 55 00 04 00 62 04 00 55 00 04 00
+R 00 00 00 00 01 02 00 01 01 06 00 01 01 0D 00 01
+T 00 15 80 01 5F 00 03 00 02 5F 00 02
+R 00 00 00 00 01 05 00 01 01 07 00 01 01 0A 00 01
+T 00 1C 00 01 51 04 21 01 53 00 01 51 00 01 22
+R 00 00 00 00 01 02 00 01 01 09 00 01 01 0C 00 01
+T 00 26 00 03 AF EA 51 00 04 BF EB 55 00 04 01 51
+R 00 00 00 00 01 02 00 01 01 07 00 01 01 0C 00 01
+T 00 31 00 00 21 02 51 00 00 21 1E 60 04 8F DC 8F
+R 00 00 00 00 01 02 00 01 01 07 00 01
+T 00 3D FF
+R 00 00 00 00

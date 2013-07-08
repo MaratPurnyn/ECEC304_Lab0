@@ -1074,124 +1074,55 @@
  0000             ENDIF
  0000             POP A
  0000           ENDIF
- 0004           Bit0_Data_ADDR:	equ	4h
- 0104           Bit0_DriveMode_0_ADDR:	equ	104h
- 0105           Bit0_DriveMode_1_ADDR:	equ	105h
- 0007           Bit0_DriveMode_2_ADDR:	equ	7h
- 0006           Bit0_GlobalSelect_ADDR:	equ	6h
- 0106           Bit0_IntCtrl_0_ADDR:	equ	106h
- 0107           Bit0_IntCtrl_1_ADDR:	equ	107h
- 0005           Bit0_IntEn_ADDR:	equ	5h
- 0001           Bit0_MASK:	equ	1h
- 0000           ; Bit1 address and mask equates
- 0004           Bit1_Data_ADDR:	equ	4h
- 0104           Bit1_DriveMode_0_ADDR:	equ	104h
- 0105           Bit1_DriveMode_1_ADDR:	equ	105h
- 0007           Bit1_DriveMode_2_ADDR:	equ	7h
- 0006           Bit1_GlobalSelect_ADDR:	equ	6h
- 0106           Bit1_IntCtrl_0_ADDR:	equ	106h
- 0107           Bit1_IntCtrl_1_ADDR:	equ	107h
- 0005           Bit1_IntEn_ADDR:	equ	5h
- 0002           Bit1_MASK:	equ	2h
- 0000           ; Bit2 address and mask equates
- 0004           Bit2_Data_ADDR:	equ	4h
- 0104           Bit2_DriveMode_0_ADDR:	equ	104h
- 0105           Bit2_DriveMode_1_ADDR:	equ	105h
- 0007           Bit2_DriveMode_2_ADDR:	equ	7h
- 0006           Bit2_GlobalSelect_ADDR:	equ	6h
- 0106           Bit2_IntCtrl_0_ADDR:	equ	106h
- 0107           Bit2_IntCtrl_1_ADDR:	equ	107h
- 0005           Bit2_IntEn_ADDR:	equ	5h
- 0004           Bit2_MASK:	equ	4h
- 0000           ; Bit3 address and mask equates
- 0004           Bit3_Data_ADDR:	equ	4h
- 0104           Bit3_DriveMode_0_ADDR:	equ	104h
- 0105           Bit3_DriveMode_1_ADDR:	equ	105h
- 0007           Bit3_DriveMode_2_ADDR:	equ	7h
- 0006           Bit3_GlobalSelect_ADDR:	equ	6h
- 0106           Bit3_IntCtrl_0_ADDR:	equ	106h
- 0107           Bit3_IntCtrl_1_ADDR:	equ	107h
- 0005           Bit3_IntEn_ADDR:	equ	5h
- 0008           Bit3_MASK:	equ	8h
- 0000           ; Bit4 address and mask equates
- 0004           Bit4_Data_ADDR:	equ	4h
- 0104           Bit4_DriveMode_0_ADDR:	equ	104h
- 0105           Bit4_DriveMode_1_ADDR:	equ	105h
- 0007           Bit4_DriveMode_2_ADDR:	equ	7h
- 0006           Bit4_GlobalSelect_ADDR:	equ	6h
- 0106           Bit4_IntCtrl_0_ADDR:	equ	106h
- 0107           Bit4_IntCtrl_1_ADDR:	equ	107h
- 0005           Bit4_IntEn_ADDR:	equ	5h
- 0010           Bit4_MASK:	equ	10h
- 0000           ; Bit5 address and mask equates
- 0004           Bit5_Data_ADDR:	equ	4h
- 0104           Bit5_DriveMode_0_ADDR:	equ	104h
- 0105           Bit5_DriveMode_1_ADDR:	equ	105h
- 0007           Bit5_DriveMode_2_ADDR:	equ	7h
- 0006           Bit5_GlobalSelect_ADDR:	equ	6h
- 0106           Bit5_IntCtrl_0_ADDR:	equ	106h
- 0107           Bit5_IntCtrl_1_ADDR:	equ	107h
- 0005           Bit5_IntEn_ADDR:	equ	5h
- 0020           Bit5_MASK:	equ	20h
- 0000           ; Bit6 address and mask equates
- 0004           Bit6_Data_ADDR:	equ	4h
- 0104           Bit6_DriveMode_0_ADDR:	equ	104h
- 0105           Bit6_DriveMode_1_ADDR:	equ	105h
- 0007           Bit6_DriveMode_2_ADDR:	equ	7h
- 0006           Bit6_GlobalSelect_ADDR:	equ	6h
- 0106           Bit6_IntCtrl_0_ADDR:	equ	106h
- 0107           Bit6_IntCtrl_1_ADDR:	equ	107h
- 0005           Bit6_IntEn_ADDR:	equ	5h
- 0040           Bit6_MASK:	equ	40h
- 0000           ; Bit7 address and mask equates
- 0004           Bit7_Data_ADDR:	equ	4h
- 0104           Bit7_DriveMode_0_ADDR:	equ	104h
- 0105           Bit7_DriveMode_1_ADDR:	equ	105h
- 0007           Bit7_DriveMode_2_ADDR:	equ	7h
- 0006           Bit7_GlobalSelect_ADDR:	equ	6h
- 0106           Bit7_IntCtrl_0_ADDR:	equ	106h
- 0107           Bit7_IntCtrl_1_ADDR:	equ	107h
- 0005           Bit7_IntEn_ADDR:	equ	5h
- 0080           Bit7_MASK:	equ	80h
- 0000           
                 export bShadow
                 
-                area myArea(ROM,ABS,CON)
-                                ORG 40h
- 0040           		bShadow: 
- 0040                                   BLK 1; Reserve a RAM location named bShadow
+                area MyArea(RAM) ;Create storage location for variables
+ 0000                   bShadow: BLK 1
+ 0001                   bTemp0: BLK 1
+ 0002                   bTemp1: BLK 1
+ 0003                   bTemp2: BLK 1
+ 0004                   bSwitchOn: BLK 1
                 area text(ROM,REL)
                 
                 export _main
- 0000           _main:
- 0000 554000            mov [bShadow],0
- 0003           loop:
- 0003 7640              inc [bShadow]
- 0005 5140              mov A,[bShadow]
- 0007 6004              mov reg[PRT1DR],A
- 0009 8FF9              jmp loop
- 000B           
- 000B           .terminate:
- 000B 8FFF          jmp .terminate
- 000D           
- 000D           
- 000D           ;-----------------------------------------------------------------------------
- 000D           ; Assembly main line
- 000D           ;-----------------------------------------------------------------------------
- 000D           
- 000D           ;//include "m8c.inc"       ; part specific constants and macros
- 000D           ;include "memory.inc"    ; Constants & macros for SMM/LMM and Compiler
- 000D           ;include "PSoCAPI.inc"   ; PSoC API definitions for all User Modules
- 000D           ;
- 000D           ;export _main
- 000D           ;
- 000D           ;_main:
- 000D           ;loop:
- 000D           ;       mov     A,reg[04h]      ; 4 clk cycles
- 000D           ;       inc A                           ; 4
- 000D           ;       mov reg[04h],A  ; 4
- 000D           ;       jmp loop                        ; 5
- 000D           ;
- 000D           ;.terminate:
- 000D           ;    jmp .terminate
- 000D           ;
+ 0000           _main:	
+ 0000           ;Initialize
+ 0000 550000            mov [bShadow],0 ;Initialize variables as 1
+ 0003 550100            mov [bTemp0],0
+ 0006 550200            mov [bTemp1],0
+ 0009 550300            mov [bTemp2],0
+ 000C 550400            mov [bSwitchOn],0
+ 000F 620400            mov reg[PRT1DR],0
+ 0012                   
+ 0012           switchOff: 
+ 0012           ;;Switch is off
+ 0012 550400            mov [bSwitchOn], 0 
+ 0015 8001              jmp loop        
+ 0017                   
+ 0017           loop:
+ 0017           ;Update Switch History
+ 0017 5F0302            mov [bTemp2], [bTemp1]
+ 001A 5F0201            mov [bTemp1], [bTemp0]
+ 001D 5104              mov A,[PRT1DR]
+ 001F 2101              and A, 01h
+ 0021 5301              mov [bTemp0], A
+ 0023           ;Jump if the and of all the Temps 0?
+ 0023 5101              mov A, [bTemp0] & [bTemp1]
+ 0025 2203              and A, [bTemp2]
+ 0027 AFEA              jz switchOff
+ 0029 5104              mov A, [bSwitchOn]
+ 002B BFEB              jnz loop
+ 002D           ;Switch Just On
+ 002D 550401            mov [bSwitchOn], 1
+ 0030           ;Increment LEDs
+ 0030 5100              mov A,[bShadow]
+ 0032 2102              and A,2 
+ 0034 5100              mov A,[bShadow]
+ 0036 211E              and A,1eh
+ 0038 6004              mov reg[PRT1DR],A
+ 003A 8FDC              jmp loop
+ 003C           
+ 003C           
+ 003C                   
+ 003C           .terminate:
+ 003C 8FFF          jmp .terminate

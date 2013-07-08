@@ -1,43 +1,53 @@
-Project:      output/Lab1B
+Project:      output/LAB1C
 Build Number: 0
-Date:         Mon Jul 08 16:31:07 2013
+Date:         Mon Jul 08 17:14:13 2013
 Compiler:     ICCM8C
 Version:      7.05.00
 
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                        func_lit   01A0   0002 =      2. bytes (rel,con,rom,proclab)
+                             lit   01A0   0074 =    116. bytes (rel,con,rom,lit)
 
        Addr  Global Symbol
       -----  --------------------------------
-       01A0  __func_lit_start
-       01A2  __func_lit_end
+       01A0  LoadConfigTBL_lab1c_Bank0
+       01EF  LoadConfigTBL_lab1c_Bank1
+       0214  __lit_end
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                     psoc_config   01A2   01C0 =    448. bytes (rel,con,rom,code)
+                        func_lit   0214   0002 =      2. bytes (rel,con,rom,proclab)
 
        Addr  Global Symbol
       -----  --------------------------------
-       01A2  LoadConfigTBL_lab1a
-       0358  LoadConfigInit
-       0358  _LoadConfigInit
-       035C  LoadConfig_lab1a
-       035C  _LoadConfig_lab1a
-       0362  __psoc_config_end
+       0214  __func_lit_start
+       0216  __func_lit_end
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                            text   0362   000D =     13. bytes (rel,con,rom,code)
+                     psoc_config   0216   0167 =    359. bytes (rel,con,rom,code)
 
        Addr  Global Symbol
       -----  --------------------------------
-       0362  __text_start
-       0362  _main
-       036F  __xidata_start
-       036F  __text_end
-       0371  __xidata_end
+       0216  LoadConfigTBL_lab1c_Ordered
+       031B  LoadConfigInit
+       031B  _LoadConfigInit
+       0322  LoadConfig_lab1c
+       0322  _LoadConfig_lab1c
+       037D  __psoc_config_end
+
+Area                               Addr   Size   Decimal Bytes (Attributes)
+--------------------------------   ----   ----   ------- ----- ------------
+                            text   037D   003E =     62. bytes (rel,con,rom,code)
+
+       Addr  Global Symbol
+      -----  --------------------------------
+       037D  __text_start
+       037D  _main
+       03BB  __xidata_start
+       03BB  __text_end
+       03BD  __xidata_end
 
 Area                               Start  End    Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
@@ -49,22 +59,22 @@ Area                               Start  End    Decimal Bytes (Attributes)
        0140  _bGetPowerSetting
        0140  bGetPowerSetting
 
-Area                               Start  End    Decimal Bytes (Attributes)
+Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                          myArea   0040   0041 =      1. bytes (abs,ovr,rom,code)
+                          MyArea   0000   0005 =      5. bytes (rel,con,ram)
 
        Addr  Global Symbol
       -----  --------------------------------
-       0040  bShadow
+       0000  bShadow
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-               virtual_registers   0000   0002 =      2. bytes (rel,con,ram)
+               virtual_registers   0005   0002 =      2. bytes (rel,con,ram)
 
        Addr  Global Symbol
       -----  --------------------------------
-       0000  __r1
-       0001  __r0
+       0005  __r1
+       0006  __r0
 
 Files Linked      [ module(s) ]
 
@@ -77,7 +87,7 @@ Area Definitions
 -blit:0x1a0.0x7fff
 -bdata:0.0x6ff
 -BInterruptRAM:0	allocated at: 0
--Bvirtual_registers	allocated at: 0
--Blab1a_RAM
+-Bvirtual_registers	allocated at: 0x5
+-Blab1c_RAM
 -rwh:SSCParmBlk:0xf7.0xff
 
