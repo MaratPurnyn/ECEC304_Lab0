@@ -1,6 +1,6 @@
 Project:      output/LAB1C
 Build Number: 0
-Date:         Mon Jul 08 17:14:13 2013
+Date:         Wed Jul 10 16:42:40 2013
 Compiler:     ICCM8C
 Version:      7.05.00
 
@@ -39,15 +39,15 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                            text   037D   003E =     62. bytes (rel,con,rom,code)
+                            text   037D   0026 =     38. bytes (rel,con,rom,code)
 
        Addr  Global Symbol
       -----  --------------------------------
        037D  __text_start
        037D  _main
-       03BB  __xidata_start
-       03BB  __text_end
-       03BD  __xidata_end
+       03A3  __xidata_start
+       03A3  __text_end
+       03A5  __xidata_end
 
 Area                               Start  End    Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
@@ -61,20 +61,20 @@ Area                               Start  End    Decimal Bytes (Attributes)
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                          MyArea   0000   0005 =      5. bytes (rel,con,ram)
+                          MyArea   0000   0001 =      1. bytes (rel,con,ram)
 
        Addr  Global Symbol
       -----  --------------------------------
-       0000  bShadow
+       0002  bShadow
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-               virtual_registers   0005   0002 =      2. bytes (rel,con,ram)
+               virtual_registers   0000   0002 =      2. bytes (rel,con,ram)
 
        Addr  Global Symbol
       -----  --------------------------------
-       0005  __r1
-       0006  __r0
+       0000  __r1
+       0001  __r0
 
 Files Linked      [ module(s) ]
 
@@ -87,7 +87,7 @@ Area Definitions
 -blit:0x1a0.0x7fff
 -bdata:0.0x6ff
 -BInterruptRAM:0	allocated at: 0
--Bvirtual_registers	allocated at: 0x5
+-Bvirtual_registers	allocated at: 0
 -Blab1c_RAM
 -rwh:SSCParmBlk:0xf7.0xff
 

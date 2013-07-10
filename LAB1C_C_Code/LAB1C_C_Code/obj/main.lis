@@ -1,0 +1,83 @@
+ 0000                   cpu LMM
+                        .module main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile ./main.c
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB1C_~1\LAB1C_~1\main.c
+ 0000                   .dbfunc e main _main fV
+ 0000           _main::
+ 0000                   .dbline -1
+ 0000                   .dbline 11
+ 0000           ; //----------------------------------------------------------------------------
+ 0000           ; // C main line
+ 0000           ; //----------------------------------------------------------------------------
+ 0000           ; 
+ 0000           ; #include <m8c.h>        // part specific constants and macros
+ 0000           ; #include "PSoCAPI.h"    // PSoC API definitions for all User Modules
+ 0000           ; 
+ 0000           ; BYTE bShadow;
+ 0000           ; 
+ 0000           ; void main()
+ 0000           ; {
+ 0000                   .dbline 12
+ 0000           ;       bShadow = 0x00;
+ 0000 62D000            mov REG[0xd0],>_bShadow
+ 0003 550000            mov [_bShadow],0
+ 0006                   .dbline 13
+ 0006           ;       PRT1DR = bShadow;
+ 0006 5100              mov A,[_bShadow]
+ 0008 6004              mov REG[0x4],A
+ 000A 8029              xjmp L3
+ 000C           L5:
+ 000C                   .dbline 16
+ 000C           ;     while(1)
+ 000C           ;       {
+ 000C           ;               while(!((PRT1DR & 0x01) == 0x01)){
+ 000C                   .dbline 18
+ 000C           ;                       // loop here until button is pushed
+ 000C           ;               }
+ 000C           L6:
+ 000C                   .dbline 16
+ 000C 5D04              mov A,REG[0x4]
+ 000E 62D000            mov REG[0xd0],>__r0
+ 0011 5300              mov [__r0],A
+ 0013 260001            and [__r0],1
+ 0016 3C0001            cmp [__r0],1
+ 0019 BFF2              jnz L5
+ 001B                   .dbline 19
+ 001B           ;               bShadow += 0x02;
+ 001B 62D000            mov REG[0xd0],>_bShadow
+ 001E 060002            add [_bShadow],2
+ 0021                   .dbline 20
+ 0021           ;               PRT1DR = bShadow;
+ 0021 5100              mov A,[_bShadow]
+ 0023 6004              mov REG[0x4],A
+ 0025           L8:
+ 0025                   .dbline 21
+ 0025           ;               while((PRT1DR & 0x01) == 0x01){
+ 0025                   .dbline 23
+ 0025           ;                       // loop here until button is released
+ 0025           ;               }
+ 0025           L9:
+ 0025                   .dbline 21
+ 0025 5D04              mov A,REG[0x4]
+ 0027 62D000            mov REG[0xd0],>__r0
+ 002A 5300              mov [__r0],A
+ 002C 260001            and [__r0],1
+ 002F 3C0001            cmp [__r0],1
+ 0032 AFF2              jz L8
+ 0034                   .dbline 24
+ 0034           ;       }
+ 0034           L3:
+ 0034                   .dbline 14
+ 0034 8FD7              xjmp L6
+ 0036           X0:
+ 0036                   .dbline -2
+ 0036           L1:
+ 0036                   .dbline 0 ; func end
+ 0036 8FFF              jmp .
+ 0038                   .dbend
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB1C_~1\LAB1C_~1\main.c
+ 0000           _bShadow::
+ 0000 00                .byte 0
+ 0001                   .dbsym e bShadow _bShadow c

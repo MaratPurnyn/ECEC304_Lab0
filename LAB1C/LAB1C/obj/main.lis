@@ -1074,55 +1074,85 @@
  0000             ENDIF
  0000             POP A
  0000           ENDIF
+ 0004           SwitchInput_Data_ADDR:	equ	4h
+ 0104           SwitchInput_DriveMode_0_ADDR:	equ	104h
+ 0105           SwitchInput_DriveMode_1_ADDR:	equ	105h
+ 0007           SwitchInput_DriveMode_2_ADDR:	equ	7h
+ 0006           SwitchInput_GlobalSelect_ADDR:	equ	6h
+ 0106           SwitchInput_IntCtrl_0_ADDR:	equ	106h
+ 0107           SwitchInput_IntCtrl_1_ADDR:	equ	107h
+ 0005           SwitchInput_IntEn_ADDR:	equ	5h
+ 0001           SwitchInput_MASK:	equ	1h
+ 0000           ; LEDOut1 address and mask equates
+ 0004           LEDOut1_Data_ADDR:	equ	4h
+ 0104           LEDOut1_DriveMode_0_ADDR:	equ	104h
+ 0105           LEDOut1_DriveMode_1_ADDR:	equ	105h
+ 0007           LEDOut1_DriveMode_2_ADDR:	equ	7h
+ 0006           LEDOut1_GlobalSelect_ADDR:	equ	6h
+ 0106           LEDOut1_IntCtrl_0_ADDR:	equ	106h
+ 0107           LEDOut1_IntCtrl_1_ADDR:	equ	107h
+ 0005           LEDOut1_IntEn_ADDR:	equ	5h
+ 0002           LEDOut1_MASK:	equ	2h
+ 0000           ; LEDOut2 address and mask equates
+ 0004           LEDOut2_Data_ADDR:	equ	4h
+ 0104           LEDOut2_DriveMode_0_ADDR:	equ	104h
+ 0105           LEDOut2_DriveMode_1_ADDR:	equ	105h
+ 0007           LEDOut2_DriveMode_2_ADDR:	equ	7h
+ 0006           LEDOut2_GlobalSelect_ADDR:	equ	6h
+ 0106           LEDOut2_IntCtrl_0_ADDR:	equ	106h
+ 0107           LEDOut2_IntCtrl_1_ADDR:	equ	107h
+ 0005           LEDOut2_IntEn_ADDR:	equ	5h
+ 0004           LEDOut2_MASK:	equ	4h
+ 0000           ; LEDOut3 address and mask equates
+ 0004           LEDOut3_Data_ADDR:	equ	4h
+ 0104           LEDOut3_DriveMode_0_ADDR:	equ	104h
+ 0105           LEDOut3_DriveMode_1_ADDR:	equ	105h
+ 0007           LEDOut3_DriveMode_2_ADDR:	equ	7h
+ 0006           LEDOut3_GlobalSelect_ADDR:	equ	6h
+ 0106           LEDOut3_IntCtrl_0_ADDR:	equ	106h
+ 0107           LEDOut3_IntCtrl_1_ADDR:	equ	107h
+ 0005           LEDOut3_IntEn_ADDR:	equ	5h
+ 0008           LEDOut3_MASK:	equ	8h
+ 0000           ; LEDOut4 address and mask equates
+ 0004           LEDOut4_Data_ADDR:	equ	4h
+ 0104           LEDOut4_DriveMode_0_ADDR:	equ	104h
+ 0105           LEDOut4_DriveMode_1_ADDR:	equ	105h
+ 0007           LEDOut4_DriveMode_2_ADDR:	equ	7h
+ 0006           LEDOut4_GlobalSelect_ADDR:	equ	6h
+ 0106           LEDOut4_IntCtrl_0_ADDR:	equ	106h
+ 0107           LEDOut4_IntCtrl_1_ADDR:	equ	107h
+ 0005           LEDOut4_IntEn_ADDR:	equ	5h
+ 0010           LEDOut4_MASK:	equ	10h
+ 0000           
                 export bShadow
                 
                 area MyArea(RAM) ;Create storage location for variables
  0000                   bShadow: BLK 1
- 0001                   bTemp0: BLK 1
- 0002                   bTemp1: BLK 1
- 0003                   bTemp2: BLK 1
- 0004                   bSwitchOn: BLK 1
                 area text(ROM,REL)
                 
                 export _main
  0000           _main:	
- 0000           ;Initialize
- 0000 550000            mov [bShadow],0 ;Initialize variables as 1
- 0003 550100            mov [bTemp0],0
- 0006 550200            mov [bTemp1],0
- 0009 550300            mov [bTemp2],0
- 000C 550400            mov [bSwitchOn],0
- 000F 620400            mov reg[PRT1DR],0
- 0012                   
- 0012           switchOff: 
- 0012           ;;Switch is off
- 0012 550400            mov [bSwitchOn], 0 
- 0015 8001              jmp loop        
- 0017                   
- 0017           loop:
- 0017           ;Update Switch History
- 0017 5F0302            mov [bTemp2], [bTemp1]
- 001A 5F0201            mov [bTemp1], [bTemp0]
- 001D 5104              mov A,[PRT1DR]
- 001F 2101              and A, 01h
- 0021 5301              mov [bTemp0], A
- 0023           ;Jump if the and of all the Temps 0?
- 0023 5101              mov A, [bTemp0] & [bTemp1]
- 0025 2203              and A, [bTemp2]
- 0027 AFEA              jz switchOff
- 0029 5104              mov A, [bSwitchOn]
- 002B BFEB              jnz loop
- 002D           ;Switch Just On
- 002D 550401            mov [bSwitchOn], 1
- 0030           ;Increment LEDs
- 0030 5100              mov A,[bShadow]
- 0032 2102              and A,2 
- 0034 5100              mov A,[bShadow]
- 0036 211E              and A,1eh
- 0038 6004              mov reg[PRT1DR],A
- 003A 8FDC              jmp loop
- 003C           
- 003C           
- 003C                   
- 003C           .terminate:
- 003C 8FFF          jmp .terminate
+ 0000           
+ 0000 550000    mov [bShadow], 0
+ 0003           begin:    
+ 0003 490401            tst     reg[PRT1DR],01h
+ 0006 AFFC          jz  begin
+ 0008 060002        add [bShadow],2
+ 000B 5100          mov A,[bShadow]
+ 000D 6004          mov reg[PRT1DR], A
+ 000F 8001              jmp waitTilRelease
+ 0011                   
+ 0011           waitTilRelease:
+ 0011 490401            tst reg[PRT1DR],01h
+ 0014 BFFC              jnz waitTilRelease
+ 0016 060002            add [bShadow],2
+ 0019 5100          mov A,[bShadow]
+ 001B 6004          mov reg[PRT1DR], A
+ 001D 8001              jmp waitTilPressed
+ 001F                   
+ 001F           waitTilPressed:
+ 001F 490401            tst reg[PRT1DR],01h
+ 0022 AFE0              jz begin
+ 0024           
+ 0024           .terminate:
+ 0024 8FFF          jmp .terminate
