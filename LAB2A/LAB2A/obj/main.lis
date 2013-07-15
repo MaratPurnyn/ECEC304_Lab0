@@ -1,0 +1,74 @@
+ 0000                   cpu LMM
+                        .module main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile ./main.c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile ./main.c
+ 0000           _bShadow::
+ 0000 00                .byte 0
+ 0001                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB2A\LAB2A\main.c
+ 0001                   .dbsym e bShadow _bShadow c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB2A\LAB2A\main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB2A\LAB2A\main.c
+ 0000                   .dbfunc e main _main fV
+ 0000           _main::
+ 0000                   .dbline -1
+ 0000                   .dbline 11
+ 0000           ; //----------------------------------------------------------------------------
+ 0000           ; // C main line
+ 0000           ; //----------------------------------------------------------------------------
+ 0000           ; 
+ 0000           ; #include <m8c.h>        // part specific constants and macros
+ 0000           ; #include "PSoCAPI.h"    // PSoC API definitions for all User Modules
+ 0000           ; 
+ 0000           ; extern unsigned char bShadow = 0;
+ 0000           ; 
+ 0000           ; void main(void)
+ 0000           ;       {
+ 0000                   .dbline 12
+ 0000           ;       OSC_CR0 &= 0xE0;
+ 0000 7110              or F,0x10  ; iopage = 1
+ 0002 41E0E0            and REG[0xe0],-32
+ 0005                   .dbline 13
+ 0005           ;       OSC_CR0 |= 0x17;
+ 0005 43E017            or REG[0xe0],23
+ 0008                   .dbline 14
+ 0008           ;       PRT1DR = 0;
+ 0008 70CF              and F,0xCF      ; iopage = 0
+ 000A 620400            mov REG[0x4],0
+ 000D 8019              xjmp L3
+ 000F           L5:
+ 000F                   .dbline 16
+ 000F           ;       while(1){
+ 000F           ;               while((INT_CLR0 & 0x40) == 0);//wait til set
+ 000F           L6:
+ 000F                   .dbline 16
+ 000F 5DDA              mov A,REG[0xda]
+ 0011 62D000            mov REG[0xd0],>__r0
+ 0014 5300              mov [__r0],A
+ 0016 470040            tst [__r0],64
+ 0019 AFF5              jz L5
+ 001B                   .dbline 17
+ 001B           ;               INT_CLR0 = INT_CLR0 & ~0x40; //clear it
+ 001B 41DABF            and REG[0xda],-65
+ 001E                   .dbline 18
+ 001E           ;               bShadow++;
+ 001E 62D000            mov REG[0xd0],>_bShadow
+ 0021 7600              inc [_bShadow]
+ 0023                   .dbline 19
+ 0023           ;               PRT1DR = bShadow;               
+ 0023 5100              mov A,[_bShadow]
+ 0025 6004              mov REG[0x4],A
+ 0027                   .dbline 20
+ 0027           ;       }
+ 0027           L3:
+ 0027                   .dbline 15
+ 0027 8FE7              xjmp L6
+ 0029           X0:
+ 0029                   .dbline -2
+ 0029           L1:
+ 0029                   .dbline 0 ; func end
+ 0029 8FFF              jmp .
+ 002B                   .dbend
