@@ -1,6 +1,6 @@
-Project:      output/Lab2A_assembler
+Project:      output/LAB2C
 Build Number: 0
-Date:         Wed Jul 17 15:11:25 2013
+Date:         Wed Jul 17 15:22:01 2013
 Compiler:     ICCM8C
 Version:      7.05.00
 
@@ -11,8 +11,8 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
 
        Addr  Global Symbol
       -----  --------------------------------
-       01A0  LoadConfigTBL_lab2a_assembler_Bank0
-       01EF  LoadConfigTBL_lab2a_assembler_Bank1
+       01A0  LoadConfigTBL_lab2a_Bank0
+       01EF  LoadConfigTBL_lab2a_Bank1
        0214  __lit_end
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
@@ -30,23 +30,23 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
 
        Addr  Global Symbol
       -----  --------------------------------
-       0216  LoadConfigTBL_lab2a_assembler_Ordered
-       031B  _LoadConfigInit
+       0216  LoadConfigTBL_lab2a_Ordered
        031B  LoadConfigInit
-       0322  _LoadConfig_lab2a_assembler
-       0322  LoadConfig_lab2a_assembler
+       031B  _LoadConfigInit
+       0322  LoadConfig_lab2a
+       0322  _LoadConfig_lab2a
        037D  __psoc_config_end
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                            text   037D   001E =     30. bytes (rel,con,rom,code)
+                            text   037D   001A =     26. bytes (rel,con,rom,code)
 
        Addr  Global Symbol
       -----  --------------------------------
        037D  __text_start
        037D  _main
-       039B  __xidata_start
-       039B  __text_end
+       0397  __xidata_start
+       0397  __text_end
        039D  __xidata_end
 
 Area                               Start  End    Decimal Bytes (Attributes)
@@ -61,14 +61,6 @@ Area                               Start  End    Decimal Bytes (Attributes)
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                          MyArea   0000   0001 =      1. bytes (rel,con,ram)
-
-       Addr  Global Symbol
-      -----  --------------------------------
-       0002  bShadow
-
-Area                               Addr   Size   Decimal Bytes (Attributes)
---------------------------------   ----   ----   ------- ----- ------------
                virtual_registers   0000   0002 =      2. bytes (rel,con,ram)
 
        Addr  Global Symbol
@@ -76,10 +68,19 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
        0000  __r1
        0001  __r0
 
+Area                               Addr   Size   Decimal Bytes (Attributes)
+--------------------------------   ----   ----   ------- ----- ------------
+                            data   0000   0001 =      1. bytes (rel,con,ram)
+
+       Addr  Global Symbol
+      -----  --------------------------------
+       0000  __data_start
+       0002  _bShadow
+
 Files Linked      [ module(s) ]
 
 ./obj/boot.o	[ boot.asm ]
-obj/main.o	[ main.asm ]
+obj/main.o	[ main.c ]
 <library>	[ psocconfigtbl.asm, psocconfig.asm, r1.asm, r0.asm ]
 
 Area Definitions
@@ -88,6 +89,6 @@ Area Definitions
 -bdata:0.0x6ff
 -BInterruptRAM:0	allocated at: 0
 -Bvirtual_registers	allocated at: 0
--Blab2a_assembler_RAM
+-Blab2a_RAM
 -rwh:SSCParmBlk:0xf7.0xff
 

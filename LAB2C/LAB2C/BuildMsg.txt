@@ -6,10 +6,10 @@ lib/psocconfigtbl.asm
 Linking..
 LMM info: area 'virtual_registers' uses 2 bytes in SRAM page 0
 LMM info: area 'data' item of 1 bytes allocated in SRAM page 0
-idata dump at output/LAB2B.idata
-  ROM 2% full. 523 out of 32768 bytes used (does not include absolute areas).
+idata dump at output/LAB2C.idata
+  ROM 2% full. 503 out of 32768 bytes used (does not include absolute areas).
   RAM 1% full. 3 bytes used (does not include stack usage).
 Built with ICCM8C STD V7.05.00
  
-LAB2B - 0 error(s) 0 warning(s) 15:20:28
+LAB2C - 0 error(s) 0 warning(s) 15:22:01
 

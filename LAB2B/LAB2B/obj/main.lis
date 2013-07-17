@@ -52,42 +52,35 @@
  0014           ;       PRT1DM2 = 0x00; //DM1[0-3] = 0
  0014 70CF              and F,0xCF      ; iopage = 0
  0016 620700            mov REG[0x7],0
- 0019                   .dbline 22
- 0019           ;       
- 0019           ;       CPU_SCR0 |= 0x08; //Puts the chip into sleep mode
- 0019 43FF08            or REG[0xff],8
- 001C 8019              xjmp L3
- 001E           L5:
- 001E                   .dbline 25
- 001E           ; 
- 001E           ;       while(1){
- 001E           ;               while((INT_CLR0 & 0x40) == 0);//wait til set
- 001E           L6:
- 001E                   .dbline 25
- 001E 5DDA              mov A,REG[0xda]
- 0020 62D000            mov REG[0xd0],>__r0
- 0023 5300              mov [__r0],A
- 0025 470040            tst [__r0],64
- 0028 AFF5              jz L5
- 002A                   .dbline 26
- 002A           ;               INT_CLR0 = INT_CLR0 & ~0x40; //clear it
- 002A 41DABF            and REG[0xda],-65
- 002D                   .dbline 27
- 002D           ;               bShadow++;
- 002D 62D000            mov REG[0xd0],>_bShadow
- 0030 7600              inc [_bShadow]
- 0032                   .dbline 28
- 0032           ;               PRT1DR = bShadow;               
- 0032 5100              mov A,[_bShadow]
- 0034 6004              mov REG[0x4],A
- 0036                   .dbline 29
- 0036           ;       }
- 0036           L3:
- 0036                   .dbline 24
- 0036 8FE7              xjmp L6
- 0038           X0:
- 0038                   .dbline -2
- 0038           L1:
- 0038                   .dbline 0 ; func end
- 0038 8FFF              jmp .
- 003A                   .dbend
+ 0019 8010              xjmp L3
+ 001B           L2:
+ 001B                   .dbline 24
+ 001B           ;       
+ 001B           ;       
+ 001B           ; 
+ 001B           ;       while(1){
+ 001B                   .dbline 25
+ 001B           ;               CPU_SCR0 |= 0x08; //Puts the chip into sleep mode
+ 001B 43FF08            or REG[0xff],8
+ 001E                   .dbline 26
+ 001E           ;               INT_CLR0 = INT_CLR0 & ~0x40; //clear it
+ 001E 41DABF            and REG[0xda],-65
+ 0021                   .dbline 27
+ 0021           ;               bShadow++;
+ 0021 62D000            mov REG[0xd0],>_bShadow
+ 0024 7600              inc [_bShadow]
+ 0026                   .dbline 28
+ 0026           ;               PRT1DR = bShadow;               
+ 0026 5100              mov A,[_bShadow]
+ 0028 6004              mov REG[0x4],A
+ 002A                   .dbline 29
+ 002A           ;       }
+ 002A           L3:
+ 002A                   .dbline 24
+ 002A 8FF0              xjmp L2
+ 002C           X0:
+ 002C                   .dbline -2
+ 002C           L1:
+ 002C                   .dbline 0 ; func end
+ 002C 8FFF              jmp .
+ 002E                   .dbend

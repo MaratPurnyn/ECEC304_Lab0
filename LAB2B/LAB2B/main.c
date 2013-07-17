@@ -19,10 +19,10 @@ void main(void){
 	PRT1DM1 = 0x00; //DM1[0-3] = 0
 	PRT1DM2 = 0x00; //DM1[0-3] = 0
 	
-	CPU_SCR0 |= 0x08; //Puts the chip into sleep mode
+	
 
 	while(1){
-		while((INT_CLR0 & 0x40) == 0);//wait til set
+		CPU_SCR0 |= 0x08; //Puts the chip into sleep mode
 		INT_CLR0 = INT_CLR0 & ~0x40; //clear it
 		bShadow++;
 		PRT1DR = bShadow;		

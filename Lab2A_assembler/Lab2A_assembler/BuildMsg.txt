@@ -11,5 +11,5 @@ idata dump at output/Lab2A_assembler.idata
   RAM 1% full. 3 bytes used (does not include stack usage).
 Built with ICCM8C STD V7.05.00
  
-Lab2A_assembler - 0 error(s) 0 warning(s) 13:19:52
+Lab2A_assembler - 0 error(s) 0 warning(s) 15:11:25
 

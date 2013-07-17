@@ -1,6 +1,6 @@
 Project:      output/LAB2B
 Build Number: 0
-Date:         Wed Jul 17 14:17:58 2013
+Date:         Wed Jul 17 15:20:28 2013
 Compiler:     ICCM8C
 Version:      7.05.00
 
@@ -39,15 +39,15 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                            text   037D   003A =     58. bytes (rel,con,rom,code)
+                            text   037D   002E =     46. bytes (rel,con,rom,code)
 
        Addr  Global Symbol
       -----  --------------------------------
        037D  __text_start
        037D  _main
-       03B7  __xidata_start
-       03B7  __text_end
-       03BD  __xidata_end
+       03AB  __xidata_start
+       03AB  __text_end
+       03B1  __xidata_end
 
 Area                               Start  End    Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------

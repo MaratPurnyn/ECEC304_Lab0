@@ -1,0 +1,65 @@
+ 0000                   cpu LMM
+                        .module main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile ./main.c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile ./main.c
+ 0000           _bShadow::
+ 0000 00                .byte 0
+ 0001                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB2C\LAB2C\main.c
+ 0001                   .dbsym e bShadow _bShadow c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB2C\LAB2C\main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB2C\LAB2C\main.c
+ 0000                   .dbfunc e main _main fV
+ 0000           _main::
+ 0000                   .dbline -1
+ 0000                   .dbline 10
+ 0000           ; //----------------------------------------------------------------------------
+ 0000           ; // C main line
+ 0000           ; //----------------------------------------------------------------------------
+ 0000           ; 
+ 0000           ; #include <m8c.h>        // part specific constants and macros
+ 0000           ; #include "PSoCAPI.h"    // PSoC API definitions for all User Modules
+ 0000           ; 
+ 0000           ; extern unsigned char bShadow = 0;
+ 0000           ; 
+ 0000           ; void main(void){
+ 0000                   .dbline 12
+ 0000           ; 
+ 0000           ; PRT1DR = 0;
+ 0000 620400            mov REG[0x4],0
+ 0003                   .dbline 13
+ 0003           ; INT_MSK0 |= 0x40;
+ 0003 43E040            or REG[0xe0],64
+ 0006                   .dbline 14
+ 0006           ; M8C_EnableGInt;
+ 0006 7101                      or  F, 01h
+ 0008           
+ 0008 800D              xjmp L3
+ 000A           L2:
+ 000A                   .dbline 15
+ 000A           ; while(1){
+ 000A                   .dbline 16
+ 000A           ;               M8C_Sleep;
+ 000A 43FF08            or REG[0xff],8
+ 000D                   .dbline 17
+ 000D           ;               bShadow++;
+ 000D 62D000            mov REG[0xd0],>_bShadow
+ 0010 7600              inc [_bShadow]
+ 0012                   .dbline 18
+ 0012           ;               PRT1DR = bShadow;
+ 0012 5100              mov A,[_bShadow]
+ 0014 6004              mov REG[0x4],A
+ 0016                   .dbline 19
+ 0016           ;       }
+ 0016           L3:
+ 0016                   .dbline 15
+ 0016 8FF3              xjmp L2
+ 0018           X0:
+ 0018                   .dbline -2
+ 0018           L1:
+ 0018                   .dbline 0 ; func end
+ 0018 8FFF              jmp .
+ 001A                   .dbend
