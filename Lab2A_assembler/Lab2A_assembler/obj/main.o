@@ -1,7 +1,7 @@
 XH
 H 2 areas 2 global symbols
 M main.asm
-A text size 1D flags 0
+A text size 1E flags 0
 dbfile ./main.asm
 dbfunc 0 ? 0 I
 dbline 11 0
@@ -11,12 +11,13 @@ dbline 15 9
 dbline 16 B
 dbline 18 D
 dbline 19 F
-dbline 1A 11
-dbline 1B 13
-dbline 1C 15
-dbline 1D 17
-dbline 1E 19
-dbline 21 1B
+dbline 1A 10
+dbline 1B 12
+dbline 1C 14
+dbline 1D 16
+dbline 1E 18
+dbline 1F 1A
+dbline 22 1C
 dbfile ./lib/PSoCAPI.inc
 dbfunc 0 ? 0 I
 dbfile ./main.asm
@@ -30,9 +31,9 @@ dbfunc 0 ? 0 I
 S _main Def0000
 A MyArea size 1 flags 20
 S bShadow Def0000
-T 00 00 55 00 00 00 62 04 00 47 DA 40 B0 03 8F FA
+T 00 00 55 00 00 00 62 04 00 49 DA 40 B0 03 8F FA
 R 00 00 00 00 01 03 00 01
-T 00 0D 51 DA 21 BF 51 DA 76 00 00 51 00 00 60 04
-R 00 00 00 00 01 09 00 01 01 0C 00 01
-T 00 19 8F EC 8F FF
+T 00 0D 51 00 00 74 53 00 00 60 04 5D DA 21 BF 60
+R 00 00 00 00 01 03 00 01 01 07 00 01
+T 00 19 DA 8F EB 8F FF
 R 00 00 00 00

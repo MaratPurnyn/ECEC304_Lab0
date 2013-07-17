@@ -21,8 +21,9 @@ loop:
 	JNZ interruptLoop
 	JMP loop
 interruptLoop:
-	INC [bShadow]
 	MOV A,[bShadow]
+	INC A
+	MOV [bShadow],A
 	MOV reg[PRT1DR],A
 	MOV A,reg[INT_CLR0]
 	AND A,~40h

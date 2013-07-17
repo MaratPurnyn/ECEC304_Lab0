@@ -1162,20 +1162,21 @@ FILE: .\main.asm                        (0001) ;--------------------------------
                                         (0014) 
                                         (0015) export _main
                                         (0016) _main:	
-037D: 55 02 00 MOV   [0x2],0x0          (0017) 	mov [bShadow], 0
-0380: 62 04 00 MOV   REG[0x4],0x0       (0018) 	mov reg[PRT1DR], 0
+037D: 55 02 00 MOV   [0x2],0x0          (0017) 	MOV [bShadow], 0
+0380: 62 04 00 MOV   REG[0x4],0x0       (0018) 	MOV reg[PRT1DR], 0
                                         (0019) loop:
-0383: 47 DA 40 TST   [0xDA],0x40        (0020) 	TST [INT_CLR0],40h
+0383: 49 DA 40 TST   REG[0xDA],0x40     (0020) 	TST reg[INT_CLR0],40h
 0386: B0 03    JNZ   0x038A             (0021) 	JNZ interruptLoop
 0388: 8F FA    JMP   0x0383             (0022) 	JMP loop
                                         (0023) interruptLoop:
-038A: 51 DA    MOV   A,[0xDA]           (0024) 	MOV A,[INT_CLR0]
-038C: 21 BF    AND   A,0xBF             (0025) 	AND A,~40h
-038E: 51 DA    MOV   A,[0xDA]           (0026) 	MOV A,[INT_CLR0]
-0390: 76 02    INC   [0x2]              (0027) 	inc [bShadow]
-0392: 51 02    MOV   A,[0x2]            (0028) 	mov A,[bShadow]
-0394: 60 04    MOV   REG[0x4],A         (0029) 	mov reg[PRT1DR],A
-0396: 8F EC    JMP   0x0383             (0030) 	jmp loop
-                                        (0031) 	
-                                        (0032) .terminate:
-0398: 8F FF    JMP   0x0398             (0033)     jmp .terminate
+038A: 51 02    MOV   A,[0x2]            (0024) 	MOV A,[bShadow]
+038C: 74       INC   A                  (0025) 	INC A
+038D: 53 02    MOV   [0x2],A            (0026) 	MOV [bShadow],A
+038F: 60 04    MOV   REG[0x4],A         (0027) 	MOV reg[PRT1DR],A
+0391: 5D DA    MOV   A,REG[0xDA]        (0028) 	MOV A,reg[INT_CLR0]
+0393: 21 BF    AND   A,0xBF             (0029) 	AND A,~40h
+0395: 60 DA    MOV   REG[0xDA],A        (0030) 	MOV reg[INT_CLR0],A
+0397: 8F EB    JMP   0x0383             (0031) 	JMP loop
+                                        (0032) 	
+                                        (0033) .terminate:
+0399: 8F FF    JMP   0x0399             (0034)     jmp .terminate

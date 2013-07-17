@@ -1082,20 +1082,21 @@
                 
                 export _main
  0000           _main:	
- 0000 550000            mov [bShadow], 0
- 0003 620400            mov reg[PRT1DR], 0
+ 0000 550000            MOV [bShadow], 0
+ 0003 620400            MOV reg[PRT1DR], 0
  0006           loop:
- 0006 47DA40            TST [INT_CLR0],40h
+ 0006 49DA40            TST reg[INT_CLR0],40h
  0009 B003              JNZ interruptLoop
  000B 8FFA              JMP loop
  000D           interruptLoop:
- 000D 51DA              MOV A,[INT_CLR0]
- 000F 21BF              AND A,~40h
- 0011 51DA              MOV A,[INT_CLR0]
- 0013 7600              inc [bShadow]
- 0015 5100              mov A,[bShadow]
- 0017 6004              mov reg[PRT1DR],A
- 0019 8FEC              jmp loop
- 001B                   
- 001B           .terminate:
- 001B 8FFF          jmp .terminate
+ 000D 5100              MOV A,[bShadow]
+ 000F 74                INC A
+ 0010 5300              MOV [bShadow],A
+ 0012 6004              MOV reg[PRT1DR],A
+ 0014 5DDA              MOV A,reg[INT_CLR0]
+ 0016 21BF              AND A,~40h
+ 0018 60DA              MOV reg[INT_CLR0],A
+ 001A 8FEB              JMP loop
+ 001C                   
+ 001C           .terminate:
+ 001C 8FFF          jmp .terminate
