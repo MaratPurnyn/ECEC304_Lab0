@@ -1,0 +1,93 @@
+ 0000                   cpu LMM
+                        .module main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile ./main.c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile ./main.c
+ 0000           _bShadow::
+ 0000 00                .byte 0
+ 0001                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB2B\LAB2B\main.c
+ 0001                   .dbsym e bShadow _bShadow c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB2B\LAB2B\main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB2B\LAB2B\main.c
+ 0000                   .dbfunc e main _main fV
+ 0000           _main::
+ 0000                   .dbline -1
+ 0000                   .dbline 10
+ 0000           ; //----------------------------------------------------------------------------
+ 0000           ; // C main line
+ 0000           ; //----------------------------------------------------------------------------
+ 0000           ; 
+ 0000           ; #include <m8c.h>        // part specific constants and macros
+ 0000           ; #include "PSoCAPI.h"    // PSoC API definitions for all User Modules
+ 0000           ; 
+ 0000           ; extern unsigned char bShadow = 0;
+ 0000           ; 
+ 0000           ; void main(void){
+ 0000                   .dbline 11
+ 0000           ;       PRT1DR = 0; //Zeroes out Port 1
+ 0000 620400            mov REG[0x4],0
+ 0003                   .dbline 12
+ 0003           ;       INT_MSK0 |= 0x40;//allows sleep mode to be put into sleep
+ 0003 43E040            or REG[0xe0],64
+ 0006                   .dbline 14
+ 0006           ;       //Sets the sleep timer frequency to 8Hz
+ 0006           ;       OSC_CR0 &= ~0x18;
+ 0006 7110              or F,0x10  ; iopage = 1
+ 0008 41E0E7            and REG[0xe0],-25
+ 000B                   .dbline 15
+ 000B           ;       OSC_CR0 |= 0x10;
+ 000B 43E010            or REG[0xe0],16
+ 000E                   .dbline 18
+ 000E           ;       //These 3 ports set the drive modes of the pins\
+ 000E           ;       //DM[210] = 001 sets the drive mode to strong.
+ 000E           ;       PRT1DM0 = 0x0F; //DM0[0-3] = 1
+ 000E 62040F            mov REG[0x4],15
+ 0011                   .dbline 19
+ 0011           ;       PRT1DM1 = 0x00; //DM1[0-3] = 0
+ 0011 620500            mov REG[0x5],0
+ 0014                   .dbline 20
+ 0014           ;       PRT1DM2 = 0x00; //DM1[0-3] = 0
+ 0014 70CF              and F,0xCF      ; iopage = 0
+ 0016 620700            mov REG[0x7],0
+ 0019                   .dbline 22
+ 0019           ;       
+ 0019           ;       CPU_SCR0 |= 0x08; //Puts the chip into sleep mode
+ 0019 43FF08            or REG[0xff],8
+ 001C 8019              xjmp L3
+ 001E           L5:
+ 001E                   .dbline 25
+ 001E           ; 
+ 001E           ;       while(1){
+ 001E           ;               while((INT_CLR0 & 0x40) == 0);//wait til set
+ 001E           L6:
+ 001E                   .dbline 25
+ 001E 5DDA              mov A,REG[0xda]
+ 0020 62D000            mov REG[0xd0],>__r0
+ 0023 5300              mov [__r0],A
+ 0025 470040            tst [__r0],64
+ 0028 AFF5              jz L5
+ 002A                   .dbline 26
+ 002A           ;               INT_CLR0 = INT_CLR0 & ~0x40; //clear it
+ 002A 41DABF            and REG[0xda],-65
+ 002D                   .dbline 27
+ 002D           ;               bShadow++;
+ 002D 62D000            mov REG[0xd0],>_bShadow
+ 0030 7600              inc [_bShadow]
+ 0032                   .dbline 28
+ 0032           ;               PRT1DR = bShadow;               
+ 0032 5100              mov A,[_bShadow]
+ 0034 6004              mov REG[0x4],A
+ 0036                   .dbline 29
+ 0036           ;       }
+ 0036           L3:
+ 0036                   .dbline 24
+ 0036 8FE7              xjmp L6
+ 0038           X0:
+ 0038                   .dbline -2
+ 0038           L1:
+ 0038                   .dbline 0 ; func end
+ 0038 8FFF              jmp .
+ 003A                   .dbend

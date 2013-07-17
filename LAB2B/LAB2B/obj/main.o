@@ -1,0 +1,47 @@
+XH
+H 3 areas 3 global symbols
+M main.c
+S __r0 Ref0000
+A text size 3A flags 0
+dbfile ./main.c
+dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB2B\LAB2B\main.c
+dbfunc e main 0 fV
+dbline FFFFFFFF 0
+dbline A 0
+dbline B 0
+dbline C 3
+dbline E 6
+dbline F B
+dbline 12 E
+dbline 13 11
+dbline 14 14
+dbline 16 19
+dbline 19 1E
+dbline 19 1E
+dbline 1A 2A
+dbline 1B 2D
+dbline 1C 32
+dbline 1D 36
+dbline 18 36
+dbline FFFFFFFE 38
+dbline 0 38
+S _main Def0000
+A data size 1 flags 20
+dbfile ./main.c
+dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB2B\LAB2B\main.c
+dbsym e bShadow 0 c
+S _bShadow Def0000
+A data size 0 flags 20
+dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB2B\LAB2B\main.c
+T 00 00 00
+R 00 00 00 01
+T 00 00 62 04 00 43 E0 40 71 10 41 E0 E7 43 E0 10
+R 00 00 00 00
+T 00 0E 62 04 0F 62 05 00 70 CF 62 07 00 43 FF 08
+R 00 00 00 00
+T 00 1C 80 19 5D DA 62 D0 00 00 53 00 00 47 00 00
+R 00 00 00 00 43 08 00 00 03 0B 00 00 03 0E 00 00
+T 00 27 40 AF F5 41 DA BF 62 D0 00 00 76 00 00 51
+R 00 00 00 00 41 0A 00 01 01 0D 00 01
+T 00 33 00 00 60 04 8F E7 8F FF
+R 00 00 00 00 01 02 00 01
