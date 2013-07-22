@@ -1,0 +1,164 @@
+ 0000                   cpu LMM
+                        .module main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile ./main.c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile ./main.c
+ 0000           _bShadow::
+ 0000 00                .byte 0
+ 0001                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB2G\LAB2G\main.c
+ 0001                   .dbsym e bShadow _bShadow c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB2G\LAB2G\main.c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB2G\LAB2G\main.c
+ 0000           _bCount::
+ 0000 00                .byte 0
+ 0001                   .dbsym e bCount _bCount c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB2G\LAB2G\main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB2G\LAB2G\main.c
+ 0000                   .dbfunc e main _main fV
+ 0000           _main::
+ 0000                   .dbline -1
+ 0000                   .dbline 11
+ 0000           ; //----------------------------------------------------------------------------
+ 0000           ; // C main line
+ 0000           ; //----------------------------------------------------------------------------
+ 0000           ; 
+ 0000           ; #include <m8c.h>        // part specific constants and macros
+ 0000           ; #include "PSoCAPI.h"    // PSoC API definitions for all User Modules
+ 0000           ; 
+ 0000           ; extern unsigned char bShadow = 0;
+ 0000           ; extern unsigned char bCount = 0;
+ 0000           ; 
+ 0000           ; void main(void){
+ 0000                   .dbline 12
+ 0000           ;       PRT1DR = 0;
+ 0000 620400            mov REG[0x4],0
+ 0003                   .dbline 13
+ 0003           ;       INT_MSK0 |= 0x40;
+ 0003 43E040            or REG[0xe0],64
+ 0006                   .dbline 14
+ 0006           ;       OSC_CR0  &= ~0x18;
+ 0006 7110              or F,0x10  ; iopage = 1
+ 0008 41E0E7            and REG[0xe0],-25
+ 000B                   .dbline 15
+ 000B           ;       OSC_CR0  |= 0x08;
+ 000B 43E008            or REG[0xe0],8
+ 000E                   .dbline 16
+ 000E           ;       M8C_EnableGInt;
+ 000E 7101                      or  F, 01h
+ 0010           
+ 0010 70CF              and F,0xCF      ; iopage = 0
+ 0012 805B              xjmp L3
+ 0014           L2:
+ 0014                   .dbline 17
+ 0014           ;       while(1){
+ 0014                   .dbline 18
+ 0014           ;               PRT1DR = 0x0F;
+ 0014 62040F            mov REG[0x4],15
+ 0017                   .dbline 19
+ 0017           ;               bCount = 255;
+ 0017 62D000            mov REG[0xd0],>_bCount
+ 001A 5500FF            mov [_bCount],-1
+ 001D           L5:
+ 001D                   .dbline 20
+ 001D           ;               while(bCount > 0){
+ 001D                   .dbline 21
+ 001D           ;               }
+ 001D           L6:
+ 001D                   .dbline 20
+ 001D 62D000            mov REG[0xd0],>_bCount
+ 0020 5000              mov A,0
+ 0022 3A00              cmp A,[_bCount]
+ 0024 CFF8              jc L5
+ 0026           X1:
+ 0026                   .dbline 22
+ 0026           ;               PRT1DR = 0x07;
+ 0026 620407            mov REG[0x4],7
+ 0029                   .dbline 23
+ 0029           ;               bCount = 192;
+ 0029 62D000            mov REG[0xd0],>_bCount
+ 002C 5500C0            mov [_bCount],-64
+ 002F           L8:
+ 002F                   .dbline 24
+ 002F           ;               while(bCount > 0){
+ 002F                   .dbline 25
+ 002F           ;               }
+ 002F           L9:
+ 002F                   .dbline 24
+ 002F 62D000            mov REG[0xd0],>_bCount
+ 0032 5000              mov A,0
+ 0034 3A00              cmp A,[_bCount]
+ 0036 CFF8              jc L8
+ 0038           X2:
+ 0038                   .dbline 26
+ 0038           ;               PRT1DR = 0x03;
+ 0038 620403            mov REG[0x4],3
+ 003B                   .dbline 27
+ 003B           ;               bCount = 128;
+ 003B 62D000            mov REG[0xd0],>_bCount
+ 003E 550080            mov [_bCount],-128
+ 0041           L11:
+ 0041                   .dbline 28
+ 0041           ;               while(bCount > 0){
+ 0041                   .dbline 29
+ 0041           ;               }
+ 0041           L12:
+ 0041                   .dbline 28
+ 0041 62D000            mov REG[0xd0],>_bCount
+ 0044 5000              mov A,0
+ 0046 3A00              cmp A,[_bCount]
+ 0048 CFF8              jc L11
+ 004A           X3:
+ 004A                   .dbline 30
+ 004A           ;               PRT1DR = 0x01;
+ 004A 620401            mov REG[0x4],1
+ 004D                   .dbline 31
+ 004D           ;               bCount = 64;
+ 004D 62D000            mov REG[0xd0],>_bCount
+ 0050 550040            mov [_bCount],64
+ 0053           L14:
+ 0053                   .dbline 32
+ 0053           ;               while(bCount > 0){
+ 0053                   .dbline 33
+ 0053           ;               }
+ 0053           L15:
+ 0053                   .dbline 32
+ 0053 62D000            mov REG[0xd0],>_bCount
+ 0056 5000              mov A,0
+ 0058 3A00              cmp A,[_bCount]
+ 005A CFF8              jc L14
+ 005C           X4:
+ 005C                   .dbline 34
+ 005C           ;               PRT1DR = 0x00;
+ 005C 620400            mov REG[0x4],0
+ 005F                   .dbline 35
+ 005F           ;               bCount = 32;
+ 005F 62D000            mov REG[0xd0],>_bCount
+ 0062 550020            mov [_bCount],32
+ 0065           L17:
+ 0065                   .dbline 36
+ 0065           ;               while(bCount > 0){
+ 0065                   .dbline 37
+ 0065           ;               }
+ 0065           L18:
+ 0065                   .dbline 36
+ 0065 62D000            mov REG[0xd0],>_bCount
+ 0068 5000              mov A,0
+ 006A 3A00              cmp A,[_bCount]
+ 006C CFF8              jc L17
+ 006E           X5:
+ 006E                   .dbline 38
+ 006E           ;       }
+ 006E           L3:
+ 006E                   .dbline 17
+ 006E 8FA5              xjmp L2
+ 0070           X0:
+ 0070                   .dbline -2
+ 0070           L1:
+ 0070                   .dbline 0 ; func end
+ 0070 8FFF              jmp .
+ 0072                   .dbend

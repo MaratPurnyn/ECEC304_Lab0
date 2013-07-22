@@ -1,0 +1,93 @@
+ 0000                   cpu LMM
+                        .module main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile ./main.c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile ./main.c
+ 0000           _bShadow::
+ 0000 00                .byte 0
+ 0001                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB2F\LAB2F\main.c
+ 0001                   .dbsym e bShadow _bShadow c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB2F\LAB2F\main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB2F\LAB2F\main.c
+ 0000                   .dbfunc e main _main fV
+ 0000           _main::
+ 0000                   .dbline -1
+ 0000                   .dbline 10
+ 0000           ; //----------------------------------------------------------------------------
+ 0000           ; // C main line
+ 0000           ; //----------------------------------------------------------------------------
+ 0000           ; 
+ 0000           ; #include <m8c.h>        // part specific constants and macros
+ 0000           ; #include "PSoCAPI.h"    // PSoC API definitions for all User Modules
+ 0000           ; 
+ 0000           ; extern unsigned char bShadow = 0;
+ 0000           ; 
+ 0000           ; void main(void){
+ 0000                   .dbline 11
+ 0000           ; PRT1DR = 0;
+ 0000 620400            mov REG[0x4],0
+ 0003                   .dbline 12
+ 0003           ; INT_MSK0 |= 0x40;
+ 0003 43E040            or REG[0xe0],64
+ 0006                   .dbline 13
+ 0006           ; INT_MSK3 |= 0x80;
+ 0006 43DE80            or REG[0xde],-128
+ 0009                   .dbline 14
+ 0009           ; OSC_CR0  &= ~0x18;
+ 0009 7110              or F,0x10  ; iopage = 1
+ 000B 41E0E7            and REG[0xe0],-25
+ 000E                   .dbline 15
+ 000E           ; OSC_CR0  |= 0x10;
+ 000E 43E010            or REG[0xe0],16
+ 0011                   .dbline 16
+ 0011           ; M8C_EnableGInt;
+ 0011 7101                      or  F, 01h
+ 0013           
+ 0013 70CF              and F,0xCF      ; iopage = 0
+ 0015           L2:
+ 0015                   .dbline 17
+ 0015           ; while(1){
+ 0015                   .dbline 19
+ 0015           ;       //INT_CLR0 |= 0x40;
+ 0015           ;       }
+ 0015           L3:
+ 0015                   .dbline 17
+ 0015 8FFF              xjmp L2
+ 0017           X0:
+ 0017                   .dbline -2
+ 0017           L1:
+ 0017                   .dbline 0 ; func end
+ 0017 8FFF              jmp .
+ 0019                   .dbend
+ 0019                   .dbfunc e SleepTimerISR _SleepTimerISR fV
+ 0019           _SleepTimerISR::
+ 0019                   .dbline -1
+ 0019 71C0              or F,-64
+ 001B 08                push A
+ 001C 5DD0              mov A,REG[0xd0]
+ 001E 08                push A
+ 001F                   .dbline 24
+ 001F           ; }
+ 001F           ; 
+ 001F           ; #pragma interrupt_handler SleepTimerISR
+ 001F           ; 
+ 001F           ; void SleepTimerISR(void){
+ 001F                   .dbline 25
+ 001F           ;       bShadow++;
+ 001F 62D000            mov REG[0xd0],>_bShadow
+ 0022 7600              inc [_bShadow]
+ 0024                   .dbline 26
+ 0024           ;       PRT1DR = bShadow;
+ 0024 5100              mov A,[_bShadow]
+ 0026 6004              mov REG[0x4],A
+ 0028                   .dbline -2
+ 0028           L5:
+ 0028 18                pop A
+ 0029 60D0              mov REG[208],A
+ 002B 18                pop A
+ 002C                   .dbline 0 ; func end
+ 002C 7E                reti
+ 002D                   .dbend

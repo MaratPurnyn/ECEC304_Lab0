@@ -1,0 +1,46 @@
+XH
+H 3 areas 3 global symbols
+M main.c
+A text size 2D flags 0
+dbfile ./main.c
+dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB2F\LAB2F\main.c
+dbfunc e main 0 fV
+dbline FFFFFFFF 0
+dbline A 0
+dbline B 0
+dbline C 3
+dbline D 6
+dbline E 9
+dbline F E
+dbline 10 11
+dbline 11 15
+dbline 13 15
+dbline 11 15
+dbline FFFFFFFE 17
+dbline 0 17
+dbfunc e SleepTimerISR 19 fV
+dbline FFFFFFFF 19
+dbline 18 1F
+dbline 19 1F
+dbline 1A 24
+dbline FFFFFFFE 28
+dbline 0 2C
+S _main Def0000
+S _SleepTimerISR Def0019
+A data size 1 flags 20
+dbfile ./main.c
+dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB2F\LAB2F\main.c
+dbsym e bShadow 0 c
+S _bShadow Def0000
+A data size 0 flags 20
+dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB2F\LAB2F\main.c
+T 00 00 00
+R 00 00 00 01
+T 00 00 62 04 00 43 E0 40 43 DE 80 71 10 41 E0 E7
+R 00 00 00 00
+T 00 0E 43 E0 10 71 01 70 CF 8F FF 8F FF 71 C0 08
+R 00 00 00 00
+T 00 1C 5D D0 08 62 D0 00 00 76 00 00 51 00 00 60
+R 00 00 00 00 41 07 00 01 01 0A 00 01 01 0D 00 01
+T 00 27 04 18 60 D0 18 7E
+R 00 00 00 00
