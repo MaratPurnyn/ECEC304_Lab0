@@ -1,14 +1,32 @@
 XH
-H 1 areas 1 global symbols
+H 1 areas 5 global symbols
 M main.c
-A text size 2 flags 0
+S _DBB00_WritePeriod Ref0000
+S _PWM8a_Start Ref0000
+S _DBB00_Start Ref0000
+S _DBB00_WritePulseWidth Ref0000
+A text size 26 flags 0
 dbfile ./main.c
 dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\Lab3A\Lab3A\main.c
 dbfunc e main 0 fV
 dbline FFFFFFFF 0
-dbline A 0
-dbline FFFFFFFE 0
-dbline 0 0
+dbline C 0
+dbline D 0
+dbline E 5
+dbline F 8
+dbline 10 B
+dbline 11 E
+dbline 12 16
+dbline 16 1B
+dbline 17 1E
+dbline 18 22
+dbline 18 22
+dbline FFFFFFFE 24
+dbline 0 24
 S _main Def0000
-T 00 00 8F FF
+T 00 00 71 10 62 E1 0F 62 DF 02 41 DE FC 43 DE 03
 R 00 00 00 00
+T 00 0E 10 50 FF 70 CF 7C 00 00 50 20 7C 00 00 7C
+R 00 00 00 00 02 08 00 00 02 0D 00 03
+T 00 1C 00 00 7C 00 00 20 8F FF 8F FF
+R 00 00 00 00 02 02 00 02 02 05 00 01

@@ -12,6 +12,11 @@ LoadConfigTBL_lab3a_Bank0:
 	db		23h, 00h		;DBB00_CONTROL_REG(DBB00CR0)
 	db		21h, ffh		;DBB00_PERIOD_REG(DBB00DR1)
 	db		22h, 20h		;DBB00_COMPARE_REG(DBB00DR2)
+;  Instance name PWM8a, User Module PWM8
+;       Instance name PWM8a, Block Name PWM8(DBB10)
+	db		33h, 00h		;PWM8a_CONTROL_REG(DBB10CR0)
+	db		31h, ffh		;PWM8a_PERIOD_REG(DBB10DR1)
+	db		32h, f4h		;PWM8a_COMPARE_REG(DBB10DR2)
 ;  Global Register values Bank 0
 	db		60h, 28h		; AnalogColumnInputSelect register (AMX_IN)
 	db		66h, 00h		; AnalogComparatorControl1 register (CMP_CR1)
@@ -32,7 +37,7 @@ LoadConfigTBL_lab3a_Bank0:
 	db		bah, 10h		; Row_1_LogicInputAMux register (RDI1IS)
 	db		bbh, 33h		; Row_1_LogicSelect_0 register (RDI1LT0)
 	db		bch, 33h		; Row_1_LogicSelect_1 register (RDI1LT1)
-	db		bdh, 00h		; Row_1_OutputDrive_0 register (RDI1SRO0)
+	db		bdh, 01h		; Row_1_OutputDrive_0 register (RDI1SRO0)
 	db		beh, 00h		; Row_1_OutputDrive_1 register (RDI1SRO1)
 	db		c0h, 00h		; Row_2_InputMux register (RDI2RI)
 	db		c1h, 00h		; Row_2_InputSync register (RDI2SYN)
@@ -56,9 +61,14 @@ LoadConfigTBL_lab3a_Bank0:
 LoadConfigTBL_lab3a_Bank1:
 ;  Instance name DBB00, User Module PWM8
 ;       Instance name DBB00, Block Name PWM8(DBB00)
-	db		20h, 31h		;DBB00_FUNC_REG(DBB00FN)
+	db		20h, 21h		;DBB00_FUNC_REG(DBB00FN)
 	db		21h, 16h		;DBB00_INPUT_REG(DBB00IN)
 	db		22h, 44h		;DBB00_OUTPUT_REG(DBB00OU)
+;  Instance name PWM8a, User Module PWM8
+;       Instance name PWM8a, Block Name PWM8(DBB10)
+	db		30h, 31h		;PWM8a_FUNC_REG(DBB10FN)
+	db		31h, 16h		;PWM8a_INPUT_REG(DBB10IN)
+	db		32h, 44h		;PWM8a_OUTPUT_REG(DBB10OU)
 ;  Global Register values Bank 1
 	db		61h, 00h		; AnalogClockSelect1 register (CLK_CR1)
 	db		69h, 00h		; AnalogClockSelect2 register (CLK_CR2)
@@ -85,11 +95,11 @@ LoadConfigTBL_lab3a_Ordered:
 	M8C_SetBank0
 	mov	reg[00h], 00h		; Port_0_Data register (PRT0DR)
 	M8C_SetBank1
-	mov	reg[00h], 00h		; Port_0_DriveMode_0 register (PRT0DM0)
-	mov	reg[01h], ffh		; Port_0_DriveMode_1 register (PRT0DM1)
+	mov	reg[00h], 01h		; Port_0_DriveMode_0 register (PRT0DM0)
+	mov	reg[01h], feh		; Port_0_DriveMode_1 register (PRT0DM1)
 	M8C_SetBank0
-	mov	reg[03h], ffh		; Port_0_DriveMode_2 register (PRT0DM2)
-	mov	reg[02h], 00h		; Port_0_GlobalSelect register (PRT0GS)
+	mov	reg[03h], feh		; Port_0_DriveMode_2 register (PRT0DM2)
+	mov	reg[02h], 01h		; Port_0_GlobalSelect register (PRT0GS)
 	M8C_SetBank1
 	mov	reg[02h], 00h		; Port_0_IntCtrl_0 register (PRT0IC0)
 	mov	reg[03h], 00h		; Port_0_IntCtrl_1 register (PRT0IC1)
@@ -98,9 +108,9 @@ LoadConfigTBL_lab3a_Ordered:
 	mov	reg[04h], 00h		; Port_1_Data register (PRT1DR)
 	M8C_SetBank1
 	mov	reg[04h], 10h		; Port_1_DriveMode_0 register (PRT1DM0)
-	mov	reg[05h], efh		; Port_1_DriveMode_1 register (PRT1DM1)
+	mov	reg[05h], e7h		; Port_1_DriveMode_1 register (PRT1DM1)
 	M8C_SetBank0
-	mov	reg[07h], efh		; Port_1_DriveMode_2 register (PRT1DM2)
+	mov	reg[07h], e7h		; Port_1_DriveMode_2 register (PRT1DM2)
 	mov	reg[06h], 10h		; Port_1_GlobalSelect register (PRT1GS)
 	M8C_SetBank1
 	mov	reg[06h], 00h		; Port_1_IntCtrl_0 register (PRT1IC0)

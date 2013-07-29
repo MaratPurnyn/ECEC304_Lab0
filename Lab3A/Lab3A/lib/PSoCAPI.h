@@ -4,6 +4,8 @@
 #ifndef __PSOCAPI_H
 #define __PSOCAPI_H
 
+#include "PSoCGPIOINT.h"
 #include "DBB00.h"
+#include "PWM8a.h"
 
 #endif
