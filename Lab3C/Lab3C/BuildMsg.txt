@@ -14,5 +14,5 @@ idata dump at output/Lab3C.idata
   RAM 1% full. 2 bytes used (does not include stack usage).
 Built with ICCM8C STD V7.05.00
  
-Lab3C - 0 error(s) 0 warning(s) 16:48:25
+Lab3C - 0 error(s) 0 warning(s) 13:54:44
 

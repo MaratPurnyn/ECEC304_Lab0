@@ -901,7 +901,7 @@
  0079 D300              db              d3h, 00h                ; GlobalDigitalInterconnect_Drive_Even_Output register (GDI_E_OU)
  007B D000              db              d0h, 00h                ; GlobalDigitalInterconnect_Drive_Odd_Input register (GDI_O_IN)
  007D D200              db              d2h, 00h                ; GlobalDigitalInterconnect_Drive_Odd_Output register (GDI_O_OU)
- 007F E11F              db              e1h, 1fh                ; OscillatorControl_1 register (OSC_CR1)
+ 007F E12F              db              e1h, 2fh                ; OscillatorControl_1 register (OSC_CR1)
  0081 E200              db              e2h, 00h                ; OscillatorControl_2 register (OSC_CR2)
  0083 DFFF              db              dfh, ffh                ; OscillatorControl_3 register (OSC_CR3)
  0085 DE01              db              deh, 01h                ; OscillatorControl_4 register (OSC_CR4)
