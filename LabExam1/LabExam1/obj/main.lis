@@ -1,0 +1,218 @@
+ 0000                   cpu LMM
+                        .module main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile ./main.c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile ./main.c
+ 0000           _goingUp::
+ 0000 01                .byte 1
+ 0001                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LabExam1\LabExam1\main.c
+ 0001                   .dbsym e goingUp _goingUp c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LabExam1\LabExam1\main.c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LabExam1\LabExam1\main.c
+ 0000           _count::
+ 0000 00                .byte 0
+ 0001                   .dbsym e count _count c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LabExam1\LabExam1\main.c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LabExam1\LabExam1\main.c
+ 0000           _port1Value::
+ 0000 00                .byte 0
+ 0001                   .dbsym e port1Value _port1Value c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LabExam1\LabExam1\main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LabExam1\LabExam1\main.c
+ 0000                   .dbfunc e main _main fV
+ 0000           _main::
+ 0000                   .dbline -1
+ 0000                   .dbline 13
+ 0000           ; //----------------------------------------------------------------------------
+ 0000           ; // C main line
+ 0000           ; //----------------------------------------------------------------------------
+ 0000           ; 
+ 0000           ; #include <m8c.h>        // part specific constants and macros
+ 0000           ; #include "PSoCAPI.h"    // PSoC API definitions for all User Modules
+ 0000           ; 
+ 0000           ; extern unsigned char goingUp = 1;
+ 0000           ; extern unsigned char count = 0;
+ 0000           ; extern unsigned char port1Value = 0;
+ 0000           ; 
+ 0000           ; void main(void)
+ 0000           ; {
+ 0000                   .dbline 16
+ 0000           ;       // M8C_EnableGInt ; // Uncomment this line to enable Global Interrupts
+ 0000           ;       // Insert your main routine code here.
+ 0000           ;       INT_MSK0 |= 0x40;
+ 0000 43E040            or REG[0xe0],64
+ 0003                   .dbline 17
+ 0003           ;       M8C_EnableGInt;
+ 0003 7101                      or  F, 01h
+ 0005           
+ 0005                   .dbline 18
+ 0005           ;       PRT1DR = 0x01;
+ 0005 620401            mov REG[0x4],1
+ 0008                   .dbline 19
+ 0008           ;       PRT0DR = 0x00;
+ 0008 620000            mov REG[0],0
+ 000B                   .dbline 20
+ 000B           ;       port1Value = PRT1DR;
+ 000B 5D04              mov A,REG[0x4]
+ 000D 62D000            mov REG[0xd0],>_port1Value
+ 0010 5300              mov [_port1Value],A
+ 0012 805E              xjmp L3
+ 0014           L2:
+ 0014                   .dbline 21
+ 0014           ;       while(1){
+ 0014                   .dbline 22
+ 0014           ;               if(goingUp == 1){
+ 0014 62D000            mov REG[0xd0],>_goingUp
+ 0017 3C0001            cmp [_goingUp],1
+ 001A B030              jnz L5
+ 001C                   .dbline 23
+ 001C           ;                       if(count == 4){
+ 001C                   .dbline 23
+ 001C 62D000            mov REG[0xd0],>_count
+ 001F 3C0004            cmp [_count],4
+ 0022 B04E              jnz L6
+ 0024                   .dbline 24
+ 0024           ;                               port1Value = PRT1DR; 
+ 0024                   .dbline 24
+ 0024 5D04              mov A,REG[0x4]
+ 0026 62D000            mov REG[0xd0],>_port1Value
+ 0029 5300              mov [_port1Value],A
+ 002B                   .dbline 25
+ 002B           ;                               port1Value &= 0x0F;
+ 002B 26000F            and [_port1Value],15
+ 002E                   .dbline 26
+ 002E           ;                               port1Value |= 0x00;
+ 002E                   .dbline 27
+ 002E           ;                               if(port1Value == 0x00){
+ 002E 3C0000            cmp [_port1Value],0
+ 0031 B004              jnz L9
+ 0033                   .dbline 28
+ 0033           ;                                       PRT1DR = 0x00;
+ 0033                   .dbline 28
+ 0033 620400            mov REG[0x4],0
+ 0036                   .dbline 29
+ 0036           ;                               }
+ 0036           L9:
+ 0036                   .dbline 30
+ 0036           ;                               PRT1DR <<= 1;
+ 0036 5D04              mov A,REG[0x4]
+ 0038 62D000            mov REG[0xd0],>__r0
+ 003B 5300              mov [__r0],A
+ 003D 6500              asl [__r0]
+ 003F 5100              mov A,[__r0]
+ 0041 6004              mov REG[0x4],A
+ 0043                   .dbline 31
+ 0043           ;                               count = 0;
+ 0043 62D000            mov REG[0xd0],>_count
+ 0046 550000            mov [_count],0
+ 0049                   .dbline 32
+ 0049           ;                       }
+ 0049                   .dbline 33
+ 0049           ;               }
+ 0049 8027              xjmp L6
+ 004B           L5:
+ 004B                   .dbline 34
+ 004B           ;               else{
+ 004B                   .dbline 35
+ 004B           ;                       if(count == 4){
+ 004B 62D000            mov REG[0xd0],>_count
+ 004E 3C0004            cmp [_count],4
+ 0051 B01F              jnz L11
+ 0053                   .dbline 36
+ 0053           ;                               PRT1DR >>= 1;
+ 0053                   .dbline 36
+ 0053 5D04              mov A,REG[0x4]
+ 0055 62D000            mov REG[0xd0],>__r0
+ 0058 5300              mov [__r0],A
+ 005A 70FB              and F,-5
+ 005C 6E00              rrc [__r0]
+ 005E 5100              mov A,[__r0]
+ 0060 6004              mov REG[0x4],A
+ 0062                   .dbline 37
+ 0062           ;                               if(PRT1DR == 0x10){
+ 0062 5D04              mov A,REG[0x4]
+ 0064 3910              cmp A,16
+ 0066 B004              jnz L13
+ 0068                   .dbline 38
+ 0068           ;                                       PRT1DR = 0x01;
+ 0068                   .dbline 38
+ 0068 620401            mov REG[0x4],1
+ 006B                   .dbline 39
+ 006B           ;                               }
+ 006B           L13:
+ 006B                   .dbline 40
+ 006B           ;                               count = 0;
+ 006B 62D000            mov REG[0xd0],>_count
+ 006E 550000            mov [_count],0
+ 0071                   .dbline 41
+ 0071           ;                       }
+ 0071           L11:
+ 0071                   .dbline 42
+ 0071           ;               }
+ 0071           L6:
+ 0071                   .dbline 43
+ 0071           ;       }
+ 0071           L3:
+ 0071                   .dbline 21
+ 0071 8FA2              xjmp L2
+ 0073           X0:
+ 0073                   .dbline -2
+ 0073           L1:
+ 0073                   .dbline 0 ; func end
+ 0073 8FFF              jmp .
+ 0075                   .dbend
+ 0075                   .dbfunc e SleepTimerISR _SleepTimerISR fV
+ 0075           _SleepTimerISR::
+ 0075                   .dbline -1
+ 0075 71C0              or F,-64
+ 0077 08                push A
+ 0078 5DD0              mov A,REG[0xd0]
+ 007A 08                push A
+ 007B                   .dbline 48
+ 007B           ; }
+ 007B           ; 
+ 007B           ; #pragma interrupt_handler SleepTimerISR
+ 007B           ; 
+ 007B           ; void SleepTimerISR(void){
+ 007B                   .dbline 49
+ 007B           ;       count++;
+ 007B 62D000            mov REG[0xd0],>_count
+ 007E 7600              inc [_count]
+ 0080                   .dbline 50
+ 0080           ;       if(PRT0DR == 0x01){
+ 0080 5D00              mov A,REG[0]
+ 0082 3901              cmp A,1
+ 0084 B009              jnz L16
+ 0086                   .dbline 51
+ 0086           ;               goingUp = 0;
+ 0086                   .dbline 51
+ 0086 62D000            mov REG[0xd0],>_goingUp
+ 0089 550000            mov [_goingUp],0
+ 008C                   .dbline 52
+ 008C           ;       }
+ 008C 8007              xjmp L17
+ 008E           L16:
+ 008E                   .dbline 53
+ 008E           ;       else{
+ 008E                   .dbline 54
+ 008E           ;               goingUp = 1;
+ 008E 62D000            mov REG[0xd0],>_goingUp
+ 0091 550001            mov [_goingUp],1
+ 0094                   .dbline 55
+ 0094           ;       }
+ 0094           L17:
+ 0094                   .dbline -2
+ 0094           L15:
+ 0094 18                pop A
+ 0095 60D0              mov REG[208],A
+ 0097 18                pop A
+ 0098                   .dbline 0 ; func end
+ 0098 7E                reti
+ 0099                   .dbend

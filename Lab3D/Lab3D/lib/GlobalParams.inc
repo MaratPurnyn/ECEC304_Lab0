@@ -28,9 +28,9 @@ SELECT_32K_JUST:		equ	0h		;32K select value justified
 PLL_MODE:				equ	0h		;PLL mode value
 PLL_MODE_MASK:			equ	40h		;PLL mode mask
 PLL_MODE_JUST:			equ	0h		;PLL mode value justified
-SLEEP_TIMER:			equ	1h		;Sleep Timer value
+SLEEP_TIMER:			equ	0h		;Sleep Timer value
 SLEEP_TIMER_MASK:		equ	18h		;Sleep Timer mask
-SLEEP_TIMER_JUST:		equ	8h		;Sleep Timer value justified
+SLEEP_TIMER_JUST:		equ	0h		;Sleep Timer value justified
 SWITCH_MODE_PUMP:		equ	1h		;Switch Mode Pump setting
 SWITCH_MODE_PUMP_MASK:	equ	80h		;Switch Mode Pump mask
 SWITCH_MODE_PUMP_JUST:	equ	80h	;Switch Mode Pump justified
@@ -108,9 +108,9 @@ PORT_1_INTENABLE:		equ 0h	;Port 1 interrupt enable register (PRT1IE)
 PORT_1_INTCTRL_0:		equ 0h	;Port 1 interrupt control 0 register (PRT1IC0)
 PORT_1_INTCTRL_1:		equ 0h	;Port 1 interrupt control 1 register (PRT1IC1)
 PORT_2_GLOBAL_SELECT:	equ 0h	;Port 2 global select register (PRT2GS)
-PORT_2_DRIVE_0:			equ 0h	;Port 2 drive mode 0 register (PRT2DM0)
-PORT_2_DRIVE_1:			equ ffh	;Port 2 drive mode 1 register (PRT2DM1)
-PORT_2_DRIVE_2:			equ ffh	;Port 2 drive mode 2 register (PRT2DM2)
+PORT_2_DRIVE_0:			equ 7fh	;Port 2 drive mode 0 register (PRT2DM0)
+PORT_2_DRIVE_1:			equ 80h	;Port 2 drive mode 1 register (PRT2DM1)
+PORT_2_DRIVE_2:			equ 80h	;Port 2 drive mode 2 register (PRT2DM2)
 PORT_2_INTENABLE:		equ 0h	;Port 2 interrupt enable register (PRT2IE)
 PORT_2_INTCTRL_0:		equ 0h	;Port 2 interrupt control 0 register (PRT2IC0)
 PORT_2_INTCTRL_1:		equ 0h	;Port 2 interrupt control 1 register (PRT2IC1)

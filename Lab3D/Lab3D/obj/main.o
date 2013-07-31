@@ -1,0 +1,83 @@
+XH
+H 5 areas A global symbols
+M main.c
+S _LCD_1_Start Ref0000
+S _PWM8_1_bReadPulseWidth Ref0000
+S _LCD_1_Position Ref0000
+S _PWM8_1_Start Ref0000
+S _PWM8_1_WritePulseWidth Ref0000
+S _LCD_1_PrHexByte Ref0000
+S _LCD_1_Init Ref0000
+A text size 6E flags 0
+dbfile ./main.c
+dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\Lab3D\Lab3D\main.c
+dbfunc e main 0 fV
+dbline FFFFFFFF 0
+dbline F 0
+dbline 12 0
+dbline 13 4
+dbline 14 7
+dbline 15 B
+dbline 16 E
+dbline 17 10
+dbline 18 18
+dbline 19 18
+dbline 1A 1B
+dbline 1B 25
+dbline 1E 2D
+dbline 1F 34
+dbline 21 3D
+dbline 22 43
+dbline 22 43
+dbline 23 48
+dbline 24 4A
+dbline 25 4A
+dbline 26 50
+dbline 27 50
+dbline 28 58
+dbline 28 58
+dbline 29 5D
+dbline 2A 64
+dbline 2B 6A
+dbline 2C 6A
+dbline 18 6A
+dbline FFFFFFFE 6C
+dbline 0 6C
+S _main Def0000
+A data size 1 flags 20
+dbfile ./main.c
+dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\Lab3D\Lab3D\main.c
+dbsym e count 0 c
+S _count Def0000
+A data size 0 flags 20
+dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\Lab3D\Lab3D\main.c
+A data size 1 flags 20
+dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\Lab3D\Lab3D\main.c
+dbsym e pulseWidth 0 c
+S _pulseWidth Def0000
+A data size 0 flags 20
+dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\Lab3D\Lab3D\main.c
+T 00 00 00
+R 00 00 00 01
+T 00 00 00
+R 00 00 00 03
+T 00 00 10 7C 00 00 7C 00 00 7C 00 00 20 43 E0 40
+R 00 00 00 00 02 04 00 03 02 07 00 00 02 0A 00 06
+T 00 0E 71 01 62 D0 00 00 55 00 00 00 80 53 43 FF
+R 00 00 00 00 41 06 00 01 01 09 00 01
+T 00 1A 08 10 7C 00 00 20 62 D0 00 00 53 00 00 10
+R 00 00 00 00 02 05 00 01 41 0A 00 03 01 0D 00 03
+T 00 26 57 04 50 00 7C 00 00 57 04 50 01 7C 00 00
+R 00 00 00 00 02 07 00 02 02 0E 00 02
+T 00 34 62 D0 00 00 51 00 00 7C 00 00 20 5D 04 39
+R 00 00 00 00 41 04 00 03 01 07 00 03 02 0A 00 05
+T 00 40 08 B0 08 62 D0 00 00 76 00 00 80 07 62 D0
+R 00 00 00 00 41 07 00 01 01 0A 00 01
+T 00 4C 00 00 55 00 00 00 62 D0 00 00 3C
+R 00 00 00 00 41 02 00 01 01 05 00 01 41 0A 00 01
+T 00 54 00 00 03 B0 13 62 D0 00 00 76 00 00 10 51
+R 00 00 00 00 01 02 00 01 41 09 00 03 01 0C 00 03
+T 00 5F 00 00 7C 00 00 20 62 D0 00 00 55
+R 00 00 00 00 01 02 00 03 02 05 00 04 41 0A 00 01
+T 00 68 00 00 00 8F AD 8F FF
+R 00 00 00 00 01 02 00 01

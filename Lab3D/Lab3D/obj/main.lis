@@ -1,0 +1,155 @@
+ 0000                   cpu LMM
+                        .module main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile ./main.c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile ./main.c
+ 0000           _count::
+ 0000 00                .byte 0
+ 0001                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\Lab3D\Lab3D\main.c
+ 0001                   .dbsym e count _count c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\Lab3D\Lab3D\main.c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\Lab3D\Lab3D\main.c
+ 0000           _pulseWidth::
+ 0000 00                .byte 0
+ 0001                   .dbsym e pulseWidth _pulseWidth c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\Lab3D\Lab3D\main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\Lab3D\Lab3D\main.c
+ 0000                   .dbfunc e main _main fV
+ 0000           _main::
+ 0000                   .dbline -1
+ 0000                   .dbline 15
+ 0000           ; //----------------------------------------------------------------------------
+ 0000           ; // C main line
+ 0000           ; //----------------------------------------------------------------------------
+ 0000           ; 
+ 0000           ; #include <m8c.h>        // part specific constants and macros
+ 0000           ; #include "PSoCAPI.h"    // PSoC API definitions for all User Modules
+ 0000           ; #include "PWM8_1.h"
+ 0000           ; #include "LCD_1.h"
+ 0000           ; 
+ 0000           ; unsigned char count = 0;
+ 0000           ; unsigned char pulseWidth = 0;
+ 0000           ; //String s;
+ 0000           ; 
+ 0000           ; void main(void)
+ 0000           ; {
+ 0000                   .dbline 18
+ 0000           ;       // M8C_EnableGInt ; // Uncomment this line to enable Global Interrupts
+ 0000           ;       // Insert your main routine code here.
+ 0000           ;       PWM8_1_Start();
+ 0000 10                push X
+ 0001 7C0000            xcall _PWM8_1_Start
+ 0004                   .dbline 19
+ 0004           ;       LCD_1_Start();
+ 0004 7C0000            xcall _LCD_1_Start
+ 0007                   .dbline 20
+ 0007           ;       LCD_1_Init();
+ 0007 7C0000            xcall _LCD_1_Init
+ 000A 20                pop X
+ 000B                   .dbline 21
+ 000B           ;       INT_MSK0 |= 0x40;
+ 000B 43E040            or REG[0xe0],64
+ 000E                   .dbline 22
+ 000E           ;       M8C_EnableGInt;
+ 000E 7101                      or  F, 01h
+ 0010           
+ 0010                   .dbline 23
+ 0010           ;       count = 0;
+ 0010 62D000            mov REG[0xd0],>_count
+ 0013 550000            mov [_count],0
+ 0016 8053              xjmp L3
+ 0018           L2:
+ 0018                   .dbline 24
+ 0018           ;       while(1){
+ 0018                   .dbline 25
+ 0018           ;               M8C_Sleep;
+ 0018 43FF08            or REG[0xff],8
+ 001B                   .dbline 26
+ 001B           ;               pulseWidth = PWM8_1_bReadPulseWidth();
+ 001B 10                push X
+ 001C 7C0000            xcall _PWM8_1_bReadPulseWidth
+ 001F 20                pop X
+ 0020 62D000            mov REG[0xd0],>_pulseWidth
+ 0023 5300              mov [_pulseWidth],A
+ 0025                   .dbline 27
+ 0025           ;               LCD_1_Position(0,4);
+ 0025 10                push X
+ 0026 5704              mov X,4
+ 0028 5000              mov A,0
+ 002A 7C0000            xcall _LCD_1_Position
+ 002D                   .dbline 30
+ 002D           ;               //s = pulseWidth;
+ 002D           ;               //LCD_1_PrData(pulseWidth);
+ 002D           ;               LCD_1_Position(1,4);
+ 002D 5704              mov X,4
+ 002F 5001              mov A,1
+ 0031 7C0000            xcall _LCD_1_Position
+ 0034                   .dbline 31
+ 0034           ;               LCD_1_PrHexByte(pulseWidth);
+ 0034 62D000            mov REG[0xd0],>_pulseWidth
+ 0037 5100              mov A,[_pulseWidth]
+ 0039 7C0000            xcall _LCD_1_PrHexByte
+ 003C 20                pop X
+ 003D                   .dbline 33
+ 003D           ;               
+ 003D           ;               if(PRT1DR == 0x08){
+ 003D 5D04              mov A,REG[0x4]
+ 003F 3908              cmp A,8
+ 0041 B008              jnz L5
+ 0043                   .dbline 34
+ 0043           ;                       count++;
+ 0043                   .dbline 34
+ 0043 62D000            mov REG[0xd0],>_count
+ 0046 7600              inc [_count]
+ 0048                   .dbline 35
+ 0048           ;               }
+ 0048 8007              xjmp L6
+ 004A           L5:
+ 004A                   .dbline 36
+ 004A           ;               else{
+ 004A                   .dbline 37
+ 004A           ;                       count = 0;
+ 004A 62D000            mov REG[0xd0],>_count
+ 004D 550000            mov [_count],0
+ 0050                   .dbline 38
+ 0050           ;               }
+ 0050           L6:
+ 0050                   .dbline 39
+ 0050           ;               if(count == 3){
+ 0050 62D000            mov REG[0xd0],>_count
+ 0053 3C0003            cmp [_count],3
+ 0056 B013              jnz L7
+ 0058                   .dbline 40
+ 0058           ;                       pulseWidth++;
+ 0058                   .dbline 40
+ 0058 62D000            mov REG[0xd0],>_pulseWidth
+ 005B 7600              inc [_pulseWidth]
+ 005D                   .dbline 41
+ 005D           ;                       PWM8_1_WritePulseWidth(pulseWidth);
+ 005D 10                push X
+ 005E 5100              mov A,[_pulseWidth]
+ 0060 7C0000            xcall _PWM8_1_WritePulseWidth
+ 0063 20                pop X
+ 0064                   .dbline 42
+ 0064           ;                       count = 0;
+ 0064 62D000            mov REG[0xd0],>_count
+ 0067 550000            mov [_count],0
+ 006A                   .dbline 43
+ 006A           ;               }
+ 006A           L7:
+ 006A                   .dbline 44
+ 006A           ;       }
+ 006A           L3:
+ 006A                   .dbline 24
+ 006A 8FAD              xjmp L2
+ 006C           X0:
+ 006C                   .dbline -2
+ 006C           L1:
+ 006C                   .dbline 0 ; func end
+ 006C 8FFF              jmp .
+ 006E                   .dbend

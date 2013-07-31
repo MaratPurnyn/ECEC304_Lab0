@@ -5,7 +5,7 @@
 #define __PSOCAPI_H
 
 #include "PSoCGPIOINT.h"
+#include "LCD_1.h"
 #include "PWM8_1.h"
-#include "PWM8_2.h"
 
 #endif
