@@ -5,7 +5,8 @@
 #define __PSOCAPI_H
 
 #include "PSoCGPIOINT.h"
-#include "DBB00.h"
+#include "FanPWM.h"
 #include "LCD.h"
+#include "TachOverridePWM.h"
 
 #endif

@@ -10,23 +10,227 @@
 			<SOURCE_FILE_LIST>
 				<SOURCE_FILE NAME="main.c" TYPE="UserSourceModule" LANGUAGE="C"/>
 				<SOURCE_FILE NAME="flashsecurity.txt" TYPE="TextFile" LANGUAGE="" OVERLAY_NAME=""/>
-				<SOURCE_FILE NAME="psocapi.h" TYPE="LibraryIncludeFile" LANGUAGE="C" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="162807120" LIBTIME="1"/>
-				<SOURCE_FILE NAME="psocapi.inc" TYPE="LibraryIncludeFile" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="162807120" LIBTIME="3"/>
-				<SOURCE_FILE NAME="psocgpioint.inc" TYPE="LibraryIncludeFile" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="147120920" LIBTIME="162354917"/>
+				<SOURCE_FILE NAME="psocapi.h" TYPE="LibraryIncludeFile" LANGUAGE="C" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="157586456" LIBTIME="1"/>
+				<SOURCE_FILE NAME="psocapi.inc" TYPE="LibraryIncludeFile" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="157586456" LIBTIME="3"/>
+				<SOURCE_FILE NAME="psocgpioint.inc" TYPE="LibraryIncludeFile" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="131915560" LIBTIME="141533879"/>
 				<SOURCE_FILE NAME="memory.inc" TYPE="UserIncludeFile" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE=""/>
-				<SOURCE_FILE NAME="dbb00int.asm" TYPE="LibrarySource" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="515855197" LIBTIME="1999365004"/>
-				<SOURCE_FILE NAME="dbb00.inc" TYPE="LibraryIncludeFile" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="515855197" LIBTIME="1999365004"/>
-				<SOURCE_FILE NAME="dbb00.asm" TYPE="LibrarySource" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="515855197" LIBTIME="1999365004"/>
-				<SOURCE_FILE NAME="dbb00.h" TYPE="LibraryIncludeFile" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="515855197" LIBTIME="1999365004"/>
-				<SOURCE_FILE NAME="lcd.h" TYPE="LibraryIncludeFile" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="515855197" LIBTIME="1999365004"/>
-				<SOURCE_FILE NAME="lcd.inc" TYPE="LibraryIncludeFile" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="515855197" LIBTIME="1999365004"/>
-				<SOURCE_FILE NAME="lcd.asm" TYPE="LibrarySource" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="515855197" LIBTIME="1999365004"/>
-				<SOURCE_FILE NAME="psocconfigtbl.asm" TYPE="LibrarySource" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="147120920" LIBTIME="162355749"/>
-				<SOURCE_FILE NAME="psocgpioint.h" TYPE="LibraryIncludeFile" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="147120920" LIBTIME="162354917"/>
-				<SOURCE_FILE NAME="psocconfig.asm" TYPE="LibrarySource" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="147120920" LIBTIME="162355016"/>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<SOURCE_FILE NAME="fanpwmint.asm" TYPE="LibrarySource" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="101185925" LIBTIME="2009260940"/>
+				<SOURCE_FILE NAME="fanpwm.inc" TYPE="LibraryIncludeFile" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="101185925" LIBTIME="2009260940"/>
+				<SOURCE_FILE NAME="fanpwm.asm" TYPE="LibrarySource" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="101185925" LIBTIME="2009260940"/>
+				<SOURCE_FILE NAME="fanpwm.h" TYPE="LibraryIncludeFile" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="101185925" LIBTIME="2009260940"/>
+				<SOURCE_FILE NAME="lcd.h" TYPE="LibraryIncludeFile" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="101185925" LIBTIME="2009260940"/>
+				<SOURCE_FILE NAME="lcd.inc" TYPE="LibraryIncludeFile" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="101185925" LIBTIME="2009260940"/>
+				<SOURCE_FILE NAME="lcd.asm" TYPE="LibrarySource" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="101185925" LIBTIME="2009260940"/>
+				<SOURCE_FILE NAME="tachoverridepwmint.asm" TYPE="LibrarySource" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="101185925" LIBTIME="2009260940"/>
+				<SOURCE_FILE NAME="tachoverridepwm.inc" TYPE="LibraryIncludeFile" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="101185925" LIBTIME="2009260940"/>
+				<SOURCE_FILE NAME="tachoverridepwm.asm" TYPE="LibrarySource" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="101185925" LIBTIME="2009260940"/>
+				<SOURCE_FILE NAME="tachoverridepwm.h" TYPE="LibraryIncludeFile" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="101185925" LIBTIME="2009260940"/>
+				<SOURCE_FILE NAME="psocconfigtbl.asm" TYPE="LibrarySource" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="131915560" LIBTIME="162044335"/>
+				<SOURCE_FILE NAME="psocgpioint.h" TYPE="LibraryIncludeFile" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="131915560" LIBTIME="141533879"/>
+				<SOURCE_FILE NAME="psocconfig.asm" TYPE="LibrarySource" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="131915560" LIBTIME="141531898"/>
 				<SOURCE_FILE NAME="boot.asm" TYPE="UserSourceModule" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE=""/>
-				<SOURCE_FILE NAME="globalparams.inc" TYPE="LibraryIncludeFile" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="147120920" LIBTIME="162354912"/>
-				<SOURCE_FILE NAME="globalparams.h" TYPE="LibraryIncludeFile" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="147120920" LIBTIME="162354912"/>
+				<SOURCE_FILE NAME="globalparams.inc" TYPE="LibraryIncludeFile" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="131915560" LIBTIME="141533874"/>
+				<SOURCE_FILE NAME="globalparams.h" TYPE="LibraryIncludeFile" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" PATH_IN_TREE="" FILEMODTIME="131915560" LIBTIME="141533874"/>
 			</SOURCE_FILE_LIST>
 			<LIB_FILE_LIST>
 				<LIB_FILE NAME="libPSoC.a" TYPE="UserLibrary">

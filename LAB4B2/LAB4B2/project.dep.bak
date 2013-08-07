@@ -1,0 +1,29 @@
+# DO NOT DELETE
+./obj/boot.o : \
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C29~1/m8ssc.inc\
+   C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB4B2\LAB4B2\lib\GLOBAL~1.INC\
+   C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB4B2\LAB4B2\memory.inc
+./obj/main.o :  ./lib/FanPWM.h ./lib/LCD.h ./lib/PSoCAPI.h\
+   ./lib/PSOCGP~1.H ./lib/TACHOV~1.H\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C29~1/m8c.h
+./lib/obj/fanpwm.o :  ./lib/FanPWM.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc\
+   C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB4B2\LAB4B2\memory.inc
+./lib/obj/fanpwmint.o :  ./lib/FanPWM.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc\
+   C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB4B2\LAB4B2\memory.inc
+./lib/obj/lcd.o :  ./lib/LCD.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc\
+   C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB4B2\LAB4B2\memory.inc
+./lib/obj/psocconfig.o :  ./lib/GLOBAL~1.INC\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc\
+   C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB4B2\LAB4B2\memory.inc
+./lib/obj/psocconfigtbl.o : \
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc
+./lib/obj/tachoverridepwm.o :  ./lib/TACHOV~1.INC\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc\
+   C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB4B2\LAB4B2\memory.inc
+./lib/obj/tachoverridepwmint.o :  ./lib/TACHOV~1.INC\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc\
+   C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB4B2\LAB4B2\memory.inc
