@@ -1,0 +1,113 @@
+XH
+H 9 areas E global symbols
+M main.c
+S _LCD_PrHexByte Ref0000
+S _LCD_Init Ref0000
+S _DBB00_EnableInt Ref0000
+S __r0 Ref0000
+S _LCD_Start Ref0000
+S _DBB00_bReadPulseWidth Ref0000
+S _LCD_Position Ref0000
+S _DBB00_Start Ref0000
+S _DBB00_WritePulseWidth Ref0000
+A text size 9C flags 0
+dbfile ./main.c
+dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB4C\LAB4C\main.c
+dbfunc e main 0 fV
+dbline FFFFFFFF 0
+dbline 10 0
+dbline 12 0
+dbline 13 4
+dbline 14 7
+dbline 15 E
+dbline 16 16
+dbline 17 19
+dbline 18 1C
+dbline 19 28
+dbline 1A 2B
+dbline 1B 2F
+dbline 1C 2F
+dbline 1D 36
+dbline 1E 39
+dbline 1F 3E
+dbline 1F 3E
+dbline 20 46
+dbline 21 50
+dbline 21 50
+dbline 22 55
+dbline 23 5C
+dbline 24 65
+dbline 25 65
+dbline 27 67
+dbline 28 67
+dbline 29 70
+dbline 2B 70
+dbline 2C 79
+dbline 2D 85
+dbline 2E 8C
+dbline 2F 98
+dbline 1B 98
+dbline FFFFFFFE 9A
+dbline 0 9A
+S _main Def0000
+A data size 2 flags 20
+dbfile ./main.c
+dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB4C\LAB4C\main.c
+dbsym e dBounce 0 i
+S _dBounce Def0000
+A data size 0 flags 20
+dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB4C\LAB4C\main.c
+A data size 1 flags 20
+dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB4C\LAB4C\main.c
+dbsym e pulseWidth 0 c
+S _pulseWidth Def0000
+A data size 0 flags 20
+dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB4C\LAB4C\main.c
+A data size 1 flags 20
+dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB4C\LAB4C\main.c
+dbsym e prt1 0 c
+S _prt1 Def0000
+A data size 0 flags 20
+dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB4C\LAB4C\main.c
+A data size 2 flags 20
+dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB4C\LAB4C\main.c
+dbsym e wControlState 0 i
+S _wControlState Def0000
+A data size 0 flags 20
+dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB4C\LAB4C\main.c
+T 00 00 00 00
+R 00 00 00 01
+T 00 00 FF
+R 00 00 00 03
+T 00 00 00
+R 00 00 00 05
+T 00 00 03 E8
+R 00 00 00 07
+T 00 00 10 7C 00 00 7C 00 00 57 04 50 01 7C 00 00
+R 00 00 00 00 02 04 00 04 02 07 00 01 02 0E 00 06
+T 00 0E 62 D0 00 00 51 00 00 7C 00 00 7C
+R 00 00 00 00 41 04 00 03 01 07 00 03 02 0A 00 08
+T 00 17 00 00 7C 00 00 7C 00 00 20 62 D0
+R 00 00 00 00 02 02 00 07 02 05 00 02 02 08 00 05
+T 00 22 00 00 10 7C 00 00 20 43 E0 40 71 01 80 6A
+R 00 00 00 00 43 02 00 03 02 06 00 00
+T 00 2F 5D 04 62 D0 00 00 53 00 00 26 00 00 01 3C
+R 00 00 00 00 41 06 00 05 01 09 00 05 01 0C 00 05
+T 00 3A 00 00 01 B0 2A 62 D0 00 00 76 00 01 0E
+R 00 00 00 00 01 02 00 05 41 09 00 01 01 0C 00 01
+T 00 44 00 00 00 3C 00 00 00 B0 26 3C 00 01 03 B0
+R 00 00 00 00 01 02 00 01 01 06 00 01 01 0C 00 01
+T 00 4F 21 62 D0 00 00 7A 00 00 10 51 00 00 7C
+R 00 00 00 00 41 05 00 03 01 08 00 03 01 0C 00 03
+T 00 59 00 00 20 62 D0 00 00 55 00 01 00 55
+R 00 00 00 00 02 02 00 08 41 07 00 01 01 0A 00 01
+T 00 63 00 00 00 80 0A 62 D0 00 00 55 00 01 00 55
+R 00 00 00 00 01 02 00 01 41 09 00 01 01 0C 00 01
+T 00 6E 00 00 00 10 57 04 50 00 7C 00 00 20 62 D0
+R 00 00 00 00 01 02 00 01 02 0B 00 06
+T 00 7B 00 00 51 00 01 62 D0 00 00 10 7C
+R 00 00 00 00 41 02 00 01 01 05 00 01 43 09 00 03
+T 00 83 00 00 57 04 50 01 7C 00 00 7C 00 00 20 62
+R 00 00 00 00 02 02 00 00 02 09 00 06 02 0C 00 05
+T 00 91 D0 00 00 10 7C 00 00 20 8F 96 8F FF
+R 00 00 00 00 43 03 00 03 02 07 00 00

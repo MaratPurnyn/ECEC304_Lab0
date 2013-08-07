@@ -1,0 +1,195 @@
+ 0000                   cpu LMM
+                        .module main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile ./main.c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile ./main.c
+ 0000           _dBounce::
+ 0000 0000              .word 0
+ 0002                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB4C\LAB4C\main.c
+ 0002                   .dbsym e dBounce _dBounce i
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB4C\LAB4C\main.c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB4C\LAB4C\main.c
+ 0000           _pulseWidth::
+ 0000 FF                .byte 255
+ 0001                   .dbsym e pulseWidth _pulseWidth c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB4C\LAB4C\main.c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB4C\LAB4C\main.c
+ 0000           _prt1::
+ 0000 00                .byte 0
+ 0001                   .dbsym e prt1 _prt1 c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB4C\LAB4C\main.c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB4C\LAB4C\main.c
+ 0000           _wControlState::
+ 0000 03E8              .word 1000
+ 0002                   .dbsym e wControlState _wControlState i
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB4C\LAB4C\main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB4C\LAB4C\main.c
+ 0000                   .dbfunc e main _main fV
+ 0000           _main::
+ 0000                   .dbline -1
+ 0000                   .dbline 16
+ 0000           ; //----------------------------------------------------------------------------
+ 0000           ; // C main line
+ 0000           ; //----------------------------------------------------------------------------
+ 0000           ; 
+ 0000           ; #include <m8c.h>        // part specific constants and macros
+ 0000           ; #include "PSoCAPI.h"    // PSoC API definitions for all User Modules
+ 0000           ; #include "LCD.h"
+ 0000           ; #include "DBB00.h"
+ 0000           ; 
+ 0000           ; unsigned int dBounce = 0;
+ 0000           ; unsigned char pulseWidth = 0xFF;
+ 0000           ; unsigned char prt1 = 0x00;
+ 0000           ; unsigned int wControlState = 1000;
+ 0000           ; 
+ 0000           ; void main(void)
+ 0000           ; {
+ 0000                   .dbline 18
+ 0000           ;       // Insert your main routine code here.
+ 0000           ;       LCD_Start();
+ 0000 10                push X
+ 0001 7C0000            xcall _LCD_Start
+ 0004                   .dbline 19
+ 0004           ;       LCD_Init();
+ 0004 7C0000            xcall _LCD_Init
+ 0007                   .dbline 20
+ 0007           ;       LCD_Position(1,4);
+ 0007 5704              mov X,4
+ 0009 5001              mov A,1
+ 000B 7C0000            xcall _LCD_Position
+ 000E                   .dbline 21
+ 000E           ;       DBB00_WritePulseWidth(pulseWidth);
+ 000E 62D000            mov REG[0xd0],>_pulseWidth
+ 0011 5100              mov A,[_pulseWidth]
+ 0013 7C0000            xcall _DBB00_WritePulseWidth
+ 0016                   .dbline 22
+ 0016           ;       DBB00_Start();
+ 0016 7C0000            xcall _DBB00_Start
+ 0019                   .dbline 23
+ 0019           ;       DBB00_EnableInt();
+ 0019 7C0000            xcall _DBB00_EnableInt
+ 001C                   .dbline 24
+ 001C           ;       LCD_PrHexByte(DBB00_bReadPulseWidth());
+ 001C 7C0000            xcall _DBB00_bReadPulseWidth
+ 001F 20                pop X
+ 0020 62D000            mov REG[0xd0],>__r0
+ 0023 10                push X
+ 0024 7C0000            xcall _LCD_PrHexByte
+ 0027 20                pop X
+ 0028                   .dbline 25
+ 0028           ;       INT_MSK0 |= 0x40;
+ 0028 43E040            or REG[0xe0],64
+ 002B                   .dbline 26
+ 002B           ;       M8C_EnableGInt;
+ 002B 7101                      or  F, 01h
+ 002D           
+ 002D 806A              xjmp L3
+ 002F           L2:
+ 002F                   .dbline 27
+ 002F           ;       while(1){
+ 002F                   .dbline 28
+ 002F           ;               prt1 = PRT1DR;
+ 002F 5D04              mov A,REG[0x4]
+ 0031 62D000            mov REG[0xd0],>_prt1
+ 0034 5300              mov [_prt1],A
+ 0036                   .dbline 29
+ 0036           ;               prt1 &= 0x01;
+ 0036 260001            and [_prt1],1
+ 0039                   .dbline 30
+ 0039           ;               if(prt1 == 0x01){
+ 0039 3C0001            cmp [_prt1],1
+ 003C B02A              jnz L5
+ 003E                   .dbline 31
+ 003E           ;                       dBounce++;
+ 003E                   .dbline 31
+ 003E 62D000            mov REG[0xd0],>_dBounce
+ 0041 7601              inc [_dBounce+1]
+ 0043 0E0000            adc [_dBounce],0
+ 0046                   .dbline 32
+ 0046           ;                       if(dBounce == 3){
+ 0046 3C0000            cmp [_dBounce],0
+ 0049 B026              jnz L6
+ 004B 3C0103            cmp [_dBounce+1],3
+ 004E B021              jnz L6
+ 0050           X1:
+ 0050                   .dbline 33
+ 0050           ;                               pulseWidth--;
+ 0050                   .dbline 33
+ 0050 62D000            mov REG[0xd0],>_pulseWidth
+ 0053 7A00              dec [_pulseWidth]
+ 0055                   .dbline 34
+ 0055           ;                               DBB00_WritePulseWidth(pulseWidth);
+ 0055 10                push X
+ 0056 5100              mov A,[_pulseWidth]
+ 0058 7C0000            xcall _DBB00_WritePulseWidth
+ 005B 20                pop X
+ 005C                   .dbline 35
+ 005C           ;                               dBounce = 0;
+ 005C 62D000            mov REG[0xd0],>_dBounce
+ 005F 550100            mov [_dBounce+1],0
+ 0062 550000            mov [_dBounce],0
+ 0065                   .dbline 36
+ 0065           ;                       }
+ 0065                   .dbline 37
+ 0065           ;               }
+ 0065 800A              xjmp L6
+ 0067           L5:
+ 0067                   .dbline 39
+ 0067           ;               else
+ 0067           ;               {
+ 0067                   .dbline 40
+ 0067           ;                       dBounce = 0;
+ 0067 62D000            mov REG[0xd0],>_dBounce
+ 006A 550100            mov [_dBounce+1],0
+ 006D 550000            mov [_dBounce],0
+ 0070                   .dbline 41
+ 0070           ;               }
+ 0070           L6:
+ 0070                   .dbline 43
+ 0070           ; 
+ 0070           ;               LCD_Position(0,4);
+ 0070 10                push X
+ 0071 5704              mov X,4
+ 0073 5000              mov A,0
+ 0075 7C0000            xcall _LCD_Position
+ 0078 20                pop X
+ 0079                   .dbline 44
+ 0079           ;               LCD_PrHexByte(dBounce);
+ 0079 62D000            mov REG[0xd0],>_dBounce
+ 007C 5101              mov A,[_dBounce+1]
+ 007E 62D000            mov REG[0xd0],>__r0
+ 0081 10                push X
+ 0082 7C0000            xcall _LCD_PrHexByte
+ 0085                   .dbline 45
+ 0085           ;               LCD_Position(1,4);
+ 0085 5704              mov X,4
+ 0087 5001              mov A,1
+ 0089 7C0000            xcall _LCD_Position
+ 008C                   .dbline 46
+ 008C           ;               LCD_PrHexByte(DBB00_bReadPulseWidth());
+ 008C 7C0000            xcall _DBB00_bReadPulseWidth
+ 008F 20                pop X
+ 0090 62D000            mov REG[0xd0],>__r0
+ 0093 10                push X
+ 0094 7C0000            xcall _LCD_PrHexByte
+ 0097 20                pop X
+ 0098                   .dbline 47
+ 0098           ;       }
+ 0098           L3:
+ 0098                   .dbline 27
+ 0098 8F96              xjmp L2
+ 009A           X0:
+ 009A                   .dbline -2
+ 009A           L1:
+ 009A                   .dbline 0 ; func end
+ 009A 8FFF              jmp .
+ 009C                   .dbend

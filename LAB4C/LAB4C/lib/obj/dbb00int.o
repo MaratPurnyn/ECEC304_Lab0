@@ -1,0 +1,50 @@
+XH
+H 3 areas 2 global symbols
+M dbb00int.asm
+S _wControlState Ref0000
+A text size 0 flags 0
+dbfile lib/dbb00int.asm
+dbfunc 0 ? 0 I
+dbfile memory.inc
+dbfunc 0 ? 0 I
+dbfile lib/dbb00int.asm
+dbfunc 0 ? 0 I
+dbfile DBB00.inc
+dbfunc 0 ? 0 I
+dbfile C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc
+dbfunc 0 ? 0 I
+dbfile ./lib/DBB00.inc
+dbfunc 0 ? 0 I
+dbfile lib/dbb00int.asm
+dbfunc 0 ? 0 I
+dbfile C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc
+dbfunc 0 ? 0 I
+A InterruptRAM size 0 flags 20
+A UserModules size 26 flags 0
+dbfile lib/dbb00int.asm
+dbfunc 0 ? 0 I
+dbline 48 0
+dbline 49 2
+dbline 4A 5
+dbline 4B 7
+dbline 4C A
+dbline 4E C
+dbline 4F F
+dbline 50 12
+dbline 52 13
+dbline 53 16
+dbline 55 18
+dbline 56 1B
+dbline 57 1E
+dbline 58 21
+dbline 59 24
+dbline 6F 25
+S _DBB00_ISR Def0000
+T 00 00 7A 00 01 1E 00 00 00 B0 1F 3C 00 01 14 B0
+R 00 00 00 02 03 03 00 00 03 06 00 00 03 0C 00 00
+T 00 0B 08 62 04 40 43 B3 0F 7E 3C 00 01 00 B0 0E
+R 00 00 00 02 03 0B 00 00
+T 00 18 62 04 00 41 B3 F3 55 00 00 03 55 00 01 E8
+R 00 00 00 02 03 09 00 00 03 0D 00 00
+T 00 24 7E 7E
+R 00 00 00 02
