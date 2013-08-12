@@ -140,6 +140,7 @@ ENDIF
     reti
 
     org   1Ch                      ;GPIO Interrupt Vector
+	ljmp _gpioISR
     `@INTERRUPT_7`
     reti
 

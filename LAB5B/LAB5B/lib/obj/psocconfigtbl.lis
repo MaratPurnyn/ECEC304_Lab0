@@ -831,7 +831,7 @@
  0000           ;       Instance name PWM8, Block Name PWM8(DBB00)
  0000 2300              db              23h, 00h                ;PWM8_CONTROL_REG(DBB00CR0)
  0002 21FF              db              21h, ffh                ;PWM8_PERIOD_REG(DBB00DR1)
- 0004 2220              db              22h, 20h                ;PWM8_COMPARE_REG(DBB00DR2)
+ 0004 2200              db              22h, 00h                ;PWM8_COMPARE_REG(DBB00DR2)
  0006           ;  Global Register values Bank 0
  0006 6028              db              60h, 28h                ; AnalogColumnInputSelect register (AMX_IN)
  0008 6600              db              66h, 00h                ; AnalogComparatorControl1 register (CMP_CR1)

@@ -1491,9 +1491,10 @@
  0018 7E            reti
  0019           
                     org   1Ch                      ;GPIO Interrupt Vector
- 001C 7D0000        ljmp        PSoC_GPIO_ISR
- 001F 7E            reti
- 0020           
+ 001C 7D0000            ljmp _gpioISR
+ 001F 7D0000        ljmp        PSoC_GPIO_ISR
+ 0022 7E            reti
+ 0023           
                     org   20h                      ;PSoC Block DBB00 Interrupt Vector
  0020 7D0000        ljmp        _PWM8_ISR
  0023 7E            reti
