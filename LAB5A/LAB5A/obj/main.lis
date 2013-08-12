@@ -1,0 +1,125 @@
+ 0000                   cpu LMM
+                        .module main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile ./main.c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile ./main.c
+ 0000           _row::
+ 0000 00                .byte 0
+ 0001                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB5A\LAB5A\main.c
+ 0001                   .dbsym e row _row c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB5A\LAB5A\main.c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB5A\LAB5A\main.c
+ 0000           _col::
+ 0000 00                .byte 0
+ 0001                   .dbsym e col _col c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB5A\LAB5A\main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB5A\LAB5A\main.c
+ 0000                   .dbfunc e main _main fV
+ 0000           _main::
+ 0000                   .dbline -1
+ 0000                   .dbline 12
+ 0000           ; //----------------------------------------------------------------------------
+ 0000           ; // C main line
+ 0000           ; //----------------------------------------------------------------------------
+ 0000           ; 
+ 0000           ; #include <m8c.h>        // part specific constants and macros
+ 0000           ; #include "PSoCAPI.h"    // PSoC API definitions for all User Modules
+ 0000           ; #include "LCD.h"
+ 0000           ; unsigned char row = 0x00;
+ 0000           ; unsigned char col = 0;
+ 0000           ; 
+ 0000           ; void main(void)
+ 0000           ; {
+ 0000                   .dbline 13
+ 0000           ;       LCD_Start();
+ 0000 10                push X
+ 0001 7C0000            xcall _LCD_Start
+ 0004                   .dbline 14
+ 0004           ;       LCD_Init();
+ 0004 7C0000            xcall _LCD_Init
+ 0007                   .dbline 15
+ 0007           ;       LCD_Position(row,col);
+ 0007 62D000            mov REG[0xd0],>_col
+ 000A 5100              mov A,[_col]
+ 000C 08                push A
+ 000D 62D000            mov REG[0xd0],>_row
+ 0010 5100              mov A,[_row]
+ 0012 20                pop X
+ 0013 7C0000            xcall _LCD_Position
+ 0016 20                pop X
+ 0017                   .dbline 16
+ 0017           ;       INT_MSK0 |= 0x40;
+ 0017 43E040            or REG[0xe0],64
+ 001A                   .dbline 17
+ 001A           ;       M8C_EnableGInt; // Uncomment this line to enable Global Interrupts
+ 001A 7101                      or  F, 01h
+ 001C           
+ 001C 8038              xjmp L3
+ 001E           L2:
+ 001E                   .dbline 18
+ 001E           ;       while(1){
+ 001E                   .dbline 19
+ 001E           ;               M8C_Sleep;
+ 001E 43FF08            or REG[0xff],8
+ 0021                   .dbline 20
+ 0021           ;               LCD_Init();
+ 0021 10                push X
+ 0022 7C0000            xcall _LCD_Init
+ 0025                   .dbline 21
+ 0025           ;               LCD_Position(row,col);
+ 0025 62D000            mov REG[0xd0],>_col
+ 0028 5100              mov A,[_col]
+ 002A 08                push A
+ 002B 62D000            mov REG[0xd0],>_row
+ 002E 5100              mov A,[_row]
+ 0030 20                pop X
+ 0031 7C0000            xcall _LCD_Position
+ 0034                   .dbline 22
+ 0034           ;               LCD_PrCString("Robots");
+ 0034 5000              mov A,>L5
+ 0036 08                push A
+ 0037 5000              mov A,<L5
+ 0039 5C                mov X,A
+ 003A 18                pop A
+ 003B 7C0000            xcall _LCD_PrCString
+ 003E 20                pop X
+ 003F                   .dbline 23
+ 003F           ;               col++;
+ 003F 62D000            mov REG[0xd0],>_col
+ 0042 7600              inc [_col]
+ 0044                   .dbline 24
+ 0044           ;               if(col==16){
+ 0044 3C0010            cmp [_col],16
+ 0047 B00D              jnz L6
+ 0049                   .dbline 25
+ 0049           ;                       col = 0;
+ 0049                   .dbline 25
+ 0049 550000            mov [_col],0
+ 004C                   .dbline 26
+ 004C           ;                       row ^= 0x01;
+ 004C 62D000            mov REG[0xd0],>_row
+ 004F 5100              mov A,[_row]
+ 0051 3101              xor A,1
+ 0053 5300              mov [_row],A
+ 0055                   .dbline 27
+ 0055           ;               }
+ 0055           L6:
+ 0055                   .dbline 28
+ 0055           ;       }
+ 0055           L3:
+ 0055                   .dbline 18
+ 0055 8FC8              xjmp L2
+ 0057           X0:
+ 0057                   .dbline -2
+ 0057           L1:
+ 0057                   .dbline 0 ; func end
+ 0057 8FFF              jmp .
+ 0059                   .dbend
+                        .area lit(rom, con, rel, lit)
+ 0000           L5:
+ 0000 526F626F747300    .byte 'R,'o,'b,'o,'t,'s,0
