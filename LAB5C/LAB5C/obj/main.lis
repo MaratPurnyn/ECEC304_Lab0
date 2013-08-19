@@ -1,0 +1,293 @@
+ 0000                   cpu LMM
+                        .module main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile ./main.c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile ./main.c
+ 0000           _pulsewidth::
+ 0000 00                .byte 0
+ 0001                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB5C\LAB5C\main.c
+ 0001                   .dbsym e pulsewidth _pulsewidth c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB5C\LAB5C\main.c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB5C\LAB5C\main.c
+ 0000           _pwDir::
+ 0000 00                .byte 0
+ 0001                   .dbsym e pwDir _pwDir c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB5C\LAB5C\main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile C:\Users\msp72\DOCUME~1\GitHub\ECEC30~1\LAB5C\LAB5C\main.c
+ 0000                   .dbfunc e main _main fV
+ 0000           _main::
+ 0000                   .dbline -1
+ 0000                   .dbline 13
+ 0000           ; //----------------------------------------------------------------------------
+ 0000           ; // C main line
+ 0000           ; //----------------------------------------------------------------------------
+ 0000           ; 
+ 0000           ; #include <m8c.h>        // part specific constants and macros
+ 0000           ; #include "PSoCAPI.h"    // PSoC API definitions for all User Modules
+ 0000           ; #include "BaudClock.h"
+ 0000           ; #include "LCD.h"
+ 0000           ; 
+ 0000           ; unsigned char pulsewidth = 0x00;
+ 0000           ; unsigned char pwDir = 0;
+ 0000           ; void main(void)
+ 0000           ; {
+ 0000                   .dbline 14
+ 0000           ;       LCD_Start();
+ 0000 10                push X
+ 0001 7C0000            xcall _LCD_Start
+ 0004                   .dbline 15
+ 0004           ;       LCD_Init();
+ 0004 7C0000            xcall _LCD_Init
+ 0007                   .dbline 16
+ 0007           ;       LCD_InitBG(LCD_SOLID_BG );
+ 0007 5000              mov A,0
+ 0009 7C0000            xcall _LCD_InitBG
+ 000C                   .dbline 17
+ 000C           ;       BaudClock_Start();
+ 000C 7C0000            xcall _BaudClock_Start
+ 000F                   .dbline 18
+ 000F           ;       TX_Start(0x00);
+ 000F 5000              mov A,0
+ 0011 7C0000            xcall _TX_Start
+ 0014 20                pop X
+ 0015                   .dbline 19
+ 0015           ;       M8C_EnableGInt ;
+ 0015 7101                      or  F, 01h
+ 0017           
+ 0017                   .dbline 20
+ 0017           ;       INT_MSK0 |= 0x20;
+ 0017 43E020            or REG[0xe0],32
+ 001A                   .dbline 21
+ 001A           ;       PRT0IE |= 0x01;
+ 001A 430101            or REG[0x1],1
+ 001D                   .dbline 22
+ 001D           ;       PRT0DM0 = 0x01; //DM0[0-3] = 1
+ 001D 7110              or F,0x10  ; iopage = 1
+ 001F 620001            mov REG[0],1
+ 0022                   .dbline 23
+ 0022           ;       PRT0DM1 = 0x01; //DM1[0-3] = 0
+ 0022 620101            mov REG[0x1],1
+ 0025                   .dbline 24
+ 0025           ;       PRT0DM2 = 0x00; //DM1[0-3] = 0
+ 0025 70CF              and F,0xCF      ; iopage = 0
+ 0027 620300            mov REG[0x3],0
+ 002A                   .dbline 26
+ 002A           ; 
+ 002A           ;       PRT0IC1 = 0x01;
+ 002A 7110              or F,0x10  ; iopage = 1
+ 002C 620301            mov REG[0x3],1
+ 002F                   .dbline 27
+ 002F           ;       PRT0IC0 = 0x00;
+ 002F 620200            mov REG[0x2],0
+ 0032 70CF              and F,0xCF      ; iopage = 0
+ 0034 8041              xjmp L3
+ 0036           L2:
+ 0036                   .dbline 28
+ 0036           ;       while(1){
+ 0036                   .dbline 29
+ 0036           ;               if(pulsewidth==255){
+ 0036 62D000            mov REG[0xd0],>_pulsewidth
+ 0039 3C00FF            cmp [_pulsewidth],-1
+ 003C B007              jnz L5
+ 003E                   .dbline 30
+ 003E           ;                       pwDir = 1;
+ 003E                   .dbline 30
+ 003E 62D000            mov REG[0xd0],>_pwDir
+ 0041 550001            mov [_pwDir],1
+ 0044                   .dbline 31
+ 0044           ;               }
+ 0044           L5:
+ 0044                   .dbline 32
+ 0044           ;               LCD_DrawBG(0,0,16,pulsewidth/5);
+ 0044 62D000            mov REG[0xd0],>_pulsewidth
+ 0047 5005              mov A,5
+ 0049 08                push A
+ 004A 5100              mov A,[_pulsewidth]
+ 004C 08                push A
+ 004D 62D000            mov REG[0xd0],>__r0
+ 0050 7C0000            xcall __divmodu_8X8_8
+ 0053 18                pop A
+ 0054 38FF              add SP,-1
+ 0056 10                push X
+ 0057 08                push A
+ 0058 5010              mov A,16
+ 005A 08                push A
+ 005B 5000              mov A,0
+ 005D 08                push A
+ 005E 08                push A
+ 005F 7C0000            xcall _LCD_DrawBG
+ 0062 38FC              add SP,-4
+ 0064                   .dbline 33
+ 0064           ;               LCD_DrawBG(1,0,16,72);
+ 0064 5048              mov A,72
+ 0066 08                push A
+ 0067 5010              mov A,16
+ 0069 08                push A
+ 006A 5000              mov A,0
+ 006C 08                push A
+ 006D 5001              mov A,1
+ 006F 08                push A
+ 0070 7C0000            xcall _LCD_DrawBG
+ 0073 38FC              add SP,-4
+ 0075 20                pop X
+ 0076                   .dbline 35
+ 0076           ; 
+ 0076           ;       }
+ 0076           L3:
+ 0076                   .dbline 28
+ 0076 8FBF              xjmp L2
+ 0078           X0:
+ 0078                   .dbline -2
+ 0078           L1:
+ 0078                   .dbline 0 ; func end
+ 0078 8FFF              jmp .
+ 007A                   .dbend
+ 007A                   .dbfunc e gpioISR _gpioISR fV
+ 007A           _gpioISR::
+ 007A                   .dbline -1
+ 007A 71C0              or F,-64
+ 007C 08                push A
+ 007D 5DD0              mov A,REG[0xd0]
+ 007F 08                push A
+ 0080 5DD3              mov A,REG[0xd3]
+ 0082 08                push A
+ 0083 5DD4              mov A,REG[0xd4]
+ 0085 08                push A
+ 0086 5DD5              mov A,REG[0xd5]
+ 0088 08                push A
+ 0089 62D000            mov REG[0xd0],>__r0
+ 008C 5100              mov A,[__r0]
+ 008E 08                push A
+ 008F 5100              mov A,[__r1]
+ 0091 08                push A
+ 0092 5100              mov A,[__r2]
+ 0094 08                push A
+ 0095 5100              mov A,[__r3]
+ 0097 08                push A
+ 0098 5100              mov A,[__r4]
+ 009A 08                push A
+ 009B 5100              mov A,[__r5]
+ 009D 08                push A
+ 009E 5100              mov A,[__r6]
+ 00A0 08                push A
+ 00A1 5100              mov A,[__r7]
+ 00A3 08                push A
+ 00A4 5100              mov A,[__r8]
+ 00A6 08                push A
+ 00A7 5100              mov A,[__r9]
+ 00A9 08                push A
+ 00AA 5100              mov A,[__r10]
+ 00AC 08                push A
+ 00AD 5100              mov A,[__r11]
+ 00AF 08                push A
+ 00B0 5100              mov A,[__rX]
+ 00B2 08                push A
+ 00B3 5100              mov A,[__rY]
+ 00B5 08                push A
+ 00B6 5100              mov A,[__rZ]
+ 00B8 08                push A
+ 00B9                   .dbline 40
+ 00B9           ; }
+ 00B9           ; 
+ 00B9           ; #pragma interrupt_handler gpioISR
+ 00B9           ; 
+ 00B9           ; void gpioISR(void){
+ 00B9                   .dbline 41
+ 00B9           ;       if(pwDir == 0){
+ 00B9 62D000            mov REG[0xd0],>_pwDir
+ 00BC 3C0000            cmp [_pwDir],0
+ 00BF B009              jnz L8
+ 00C1                   .dbline 42
+ 00C1           ;               pulsewidth += 5;
+ 00C1                   .dbline 42
+ 00C1 62D000            mov REG[0xd0],>_pulsewidth
+ 00C4 060005            add [_pulsewidth],5
+ 00C7                   .dbline 43
+ 00C7           ;       }
+ 00C7 800A              xjmp L9
+ 00C9           L8:
+ 00C9                   .dbline 44
+ 00C9           ;       else{
+ 00C9                   .dbline 45
+ 00C9           ;               pulsewidth -= 5;
+ 00C9 62D000            mov REG[0xd0],>_pulsewidth
+ 00CC 5100              mov A,[_pulsewidth]
+ 00CE 1105              sub A,5
+ 00D0 5300              mov [_pulsewidth],A
+ 00D2                   .dbline 46
+ 00D2           ;       }
+ 00D2           L9:
+ 00D2                   .dbline 47
+ 00D2           ;       TX_PutSHexByte(pulsewidth);
+ 00D2 10                push X
+ 00D3 62D000            mov REG[0xd0],>_pulsewidth
+ 00D6 5100              mov A,[_pulsewidth]
+ 00D8 7C0000            xcall _TX_PutSHexByte
+ 00DB 20                pop X
+ 00DC           L10:
+ 00DC                   .dbline 48
+ 00DC           ;       while( !( TX_bReadTxStatus() & TX_TX_BUFFER_EMPTY ) );
+ 00DC           L11:
+ 00DC                   .dbline 48
+ 00DC 10                push X
+ 00DD 7C0000            xcall _TX_bReadTxStatus
+ 00E0 20                pop X
+ 00E1 62D000            mov REG[0xd0],>__r0
+ 00E4 5300              mov [__r0],A
+ 00E6 470010            tst [__r0],16
+ 00E9 AFF2              jz L10
+ 00EB                   .dbline 49
+ 00EB           ;       TX_PutCRLF();
+ 00EB 10                push X
+ 00EC 7C0000            xcall _TX_PutCRLF
+ 00EF 20                pop X
+ 00F0                   .dbline -2
+ 00F0           L7:
+ 00F0 62D000            mov REG[0xD0],>__r0
+ 00F3 18                pop A
+ 00F4 5300              mov [__rZ],A
+ 00F6 18                pop A
+ 00F7 5300              mov [__rY],A
+ 00F9 18                pop A
+ 00FA 5300              mov [__rX],A
+ 00FC 18                pop A
+ 00FD 5300              mov [__r11],A
+ 00FF 18                pop A
+ 0100 5300              mov [__r10],A
+ 0102 18                pop A
+ 0103 5300              mov [__r9],A
+ 0105 18                pop A
+ 0106 5300              mov [__r8],A
+ 0108 18                pop A
+ 0109 5300              mov [__r7],A
+ 010B 18                pop A
+ 010C 5300              mov [__r6],A
+ 010E 18                pop A
+ 010F 5300              mov [__r5],A
+ 0111 18                pop A
+ 0112 5300              mov [__r4],A
+ 0114 18                pop A
+ 0115 5300              mov [__r3],A
+ 0117 18                pop A
+ 0118 5300              mov [__r2],A
+ 011A 18                pop A
+ 011B 5300              mov [__r1],A
+ 011D 18                pop A
+ 011E 5300              mov [__r0],A
+ 0120 18                pop A
+ 0121 60D5              mov REG[213],A
+ 0123 18                pop A
+ 0124 60D4              mov REG[212],A
+ 0126 18                pop A
+ 0127 60D3              mov REG[211],A
+ 0129 18                pop A
+ 012A 60D0              mov REG[208],A
+ 012C 18                pop A
+ 012D                   .dbline 0 ; func end
+ 012D 7E                reti
+ 012E                   .dbend
